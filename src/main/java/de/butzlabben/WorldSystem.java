@@ -11,7 +11,6 @@ import de.butzlabben.world.util.VersionUtil;
 import de.butzlabben.world.util.database.DatabaseProvider;
 import de.butzlabben.world.wrapper.CreatorAdapter;
 import de.butzlabben.world.wrapper.SystemWorld;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -157,9 +156,9 @@ public class WorldSystem extends JavaPlugin {
         //this.getCommand("ws fire").setExecutor(new WorldFire());
 
 
-        System.setProperty("bstats.relocatecheck", "false");
-        Metrics m = new Metrics(this);
-        m.addCustomChart(new Metrics.SingleLineChart("worlds", DependenceConfig::getHighestID));
+        //System.setProperty("bstats.relocatecheck", "false");
+        //Metrics m = new Metrics(this);
+        //m.addCustomChart(new Metrics.SingleLineChart("worlds", DependenceConfig::getHighestID));
 
         //AutoUpdater.startAsync();
 
