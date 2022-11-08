@@ -10,6 +10,8 @@
 .gradle
 build/
 
+scr/test/*
+
 # Server
 working/*
 **/debug/**/*
