@@ -27,7 +27,7 @@ public class PluginConfig {
 
 
     //TODO Document
-    public PluginConfig(File configFile) throws FileNotFoundException {
+    public static void FindPluginConfig(File configFile) throws FileNotFoundException {
         this.configFile = configFile;
         try {
             config = YamlConfiguration.loadConfiguration(
