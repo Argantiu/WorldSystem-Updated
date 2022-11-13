@@ -1,7 +1,5 @@
 package de.butzlabben;
 
-import de.butzlabben.world.GCRunnable;
-import de.butzlabben.world.WorldCheckerRunnable;
 import de.butzlabben.world.command.CommandRegistry;
 import de.butzlabben.world.config.*;
 import de.butzlabben.world.listener.*;
@@ -9,8 +7,10 @@ import de.butzlabben.world.util.PapiExtension;
 import de.butzlabben.world.util.PlayerPositions;
 import de.butzlabben.world.util.VersionUtil;
 import de.butzlabben.world.util.database.DatabaseProvider;
+// import de.butzlabben.world.wrapper.AsyncCreatorAdapter; // Since FAWE 2.0 this do nothing
 import de.butzlabben.world.wrapper.CreatorAdapter;
 import de.butzlabben.world.wrapper.SystemWorld;
+// import org.bstats.bukkit.Metrics; // Argantiu Development hates bstats, cause of data privecy. Also it isn't working.
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -29,13 +29,12 @@ import java.io.IOException;
 public class WorldSystem extends JavaPlugin {
     private static boolean is1_13Plus = false;
     final private String version = this.getDescription().getVersion();
-    private static File configFile;
     private CreatorAdapter creator;
 
     public static void createConfigs() {
         File folder = getInstance().getDataFolder();
         File dir = new File(folder + "/worldsources");
-        configFile = new File(folder, "config.yml");
+        File config = new File(folder, "config.yml");
         File dconfig = new File(folder, "dependence.yml");
         File languages = new File(folder + "/languages");
         File gui = new File(folder, "gui.yml");
@@ -134,7 +133,6 @@ public class WorldSystem extends JavaPlugin {
                 SystemWorld sw = SystemWorld.getSystemWorld(w.getName());
                 if (sw != null && sw.isLoaded())
                     SettingsConfig.editWorld(w);
-
             }
         }, 20, 20 * 10);*/
 
@@ -155,30 +153,30 @@ public class WorldSystem extends JavaPlugin {
         //this.getCommand("ws tnt").setExecutor(new WorldTnt());
         //this.getCommand("ws fire").setExecutor(new WorldFire());
 
-
-        //System.setProperty("bstats.relocatecheck", "false");
-        //Metrics m = new Metrics(this);
-        //m.addCustomChart(new Metrics.SingleLineChart("worlds", DependenceConfig::getHighestID));
+            // Bstats deactivated
+        // System.setProperty("bstats.relocatecheck", "false");
+        // Metrics m = new Metrics(this);
+        // m.addCustomChart(new Metrics.SingleLineChart("worlds", DependenceConfig::getHighestID));
 
         //AutoUpdater.startAsync();
 
         // Choose right creatoradapter for #16
-        /*if (Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit") != null
+        if (Bukkit.getPluginManager().getPlugin("FastAsyncWorldEdit") != null
                 && Bukkit.getPluginManager().getPlugin("WorldEdit") != null
                 && PluginConfig.loadWorldsASync()
                 && !is1_13Plus) {
 
-            creator = new AsyncCreatorAdapter();
+            // creator = new AsyncCreatorAdapter(); // Since FAWE 2.0 this do nothing
             Bukkit.getConsoleSender()
                     .sendMessage(PluginConfig.getPrefix() + "Found FAWE! Worlds now will be created asynchronously");
-        } else {*/
+        } else {
             creator = (c, sw, r) -> {
                 Bukkit.getWorlds().add(c.createWorld());
                 if (sw != null)
                     sw.setCreating(false);
                 r.run();
             };
-        //}
+        }
 
         // Starting for #28
         if (PluginConfig.shouldDelete()) {
@@ -212,7 +210,5 @@ public class WorldSystem extends JavaPlugin {
     public CreatorAdapter getAdapter() {
         return creator;
     }
-
-    public static File getConfigFile() { return configFile; }
 
 }
