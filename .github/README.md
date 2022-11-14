@@ -1,5 +1,5 @@
 <p align="center">
-        <img src="https://github.com/CrazyCloudCraft/worldsystem-depecated/raw/new-idea/.github/Worldsystemlogo_V24X.png" />
+        <img src="https://github.com/CrazyCloudCraft/worldsystem-depecated/raw/new-idea/.github/CC60253F-63F9-4AC2-8C2F-13A3C22B4CBD.png" />
 </p>
 <p align="center">
     <a href="https://github.com/trainerlord/WorldSystem/releases">
