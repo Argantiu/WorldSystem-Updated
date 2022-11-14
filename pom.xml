@@ -75,7 +75,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.onarandombox.multiverse.core</groupId>
+            <groupId>com.onarandombox.multiversecore</groupId>
             <artifactId>Multiverse-Core</artifactId>
             <version>4.3.2-SNAPSHOT</version>
             <scope>provided</scope>
