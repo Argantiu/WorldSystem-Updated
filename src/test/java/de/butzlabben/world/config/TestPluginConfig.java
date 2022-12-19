@@ -12,3 +12,4 @@ public class TestPluginConfig {
         PluginConfig cfg = new PluginConfig(cfgFile);
     }
 }
+*/
