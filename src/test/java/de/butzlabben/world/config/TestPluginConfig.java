@@ -1,4 +1,4 @@
-package de.butzlabben.world.config;
+/*package de.butzlabben.world.config;
 
 import org.junit.jupiter.api.Test;
 
