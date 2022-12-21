@@ -5,7 +5,7 @@
     <a href="https://github.com/CrazyCloudCraft/worldsystem-updated-old/releases">
     <img src="https://img.shields.io/github/downloads/CrazyCloudCraft/worldsystem-updated-old/total?color=green&label=All%20downloads&style=plastic" />
     <a href="https://github.com/CrazyCloudCraft/worldsystem-updated-old/releases">
-    <img src="https://img.shields.io/github/downloads-pre/CrazyCloudCraft/worldsystem-updated-old/2.4.32/total?label=Downloads%20latest&sort=semver&style=plastic" />
+    <img src="https://img.shields.io/github/downloads-pre/CrazyCloudCraft/worldsystem-updated-old/v2.4.32/total?label=Downloads%20latest&sort=semver&style=plastic" />
 </a>
    
 <p align="center">
