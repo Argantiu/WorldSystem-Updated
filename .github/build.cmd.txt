@@ -1,0 +1,1 @@
+wget -q https://github.com/CrazyCloudCraft/worldsystem-updated-old.git && mvn --file pom.xml
