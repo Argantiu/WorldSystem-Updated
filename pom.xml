@@ -56,8 +56,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.intellectualsites.bom</groupId>
-                <artifactId>bom-1.19.x</artifactId>
-                <version>1.19</version>
+                <artifactId>bom-newest</artifactId>
+                <version>1.21</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
