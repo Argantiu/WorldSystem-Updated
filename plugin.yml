@@ -1,0 +1,6 @@
+name: WorldSystem
+ version: 2.4.33
+ author: Trainerlord
+ authors: [Butzlabben, CrazyCloudCraft] 
+ 
+ main: de.butzlabben.WorldSystem
