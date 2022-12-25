@@ -1,28 +1,14 @@
-[08:01:18 ERROR]: Error occurred while enabling WorldSystem v2.4.33 (Is it up to da
-te?)
-java.lang.NullPointerException: Cannot invoke "org.bukkit.command.PluginCommand.set
-Executor(org.bukkit.command.CommandExecutor)" because the return value of "de.butzl
-abben.WorldSystem.getCommand(String)" is null
-        at de.butzlabben.WorldSystem.onEnable(WorldSystem.java:99) ~[WorldSystem-2.
-4.33-SNAPSHOT-6.jar:?]
-        at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:264) ~[pape
-r-api-1.19.3-R0.1-SNAPSHOT.jar:?]
-        at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader.ja
-va:371) ~[paper-api-1.19.3-R0.1-SNAPSHOT.jar:?]
-        at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.j
-ava:544) ~[paper-api-1.19.3-R0.1-SNAPSHOT.jar:?]
-        at org.bukkit.craftbukkit.v1_19_R2.CraftServer.enablePlugin(CraftServer.jav
-a:578) ~[paper-1.19.3.jar:git-Paper-358]
-        at org.bukkit.craftbukkit.v1_19_R2.CraftServer.enablePlugins(CraftServer.ja
-va:492) ~[paper-1.19.3.jar:git-Paper-358]
-        at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:635
-) ~[paper-1.19.3.jar:git-Paper-358]
-        at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:434)
- ~[paper-1.19.3.jar:git-Paper-358]
-        at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServe
-r.java:301) ~[paper-1.19.3.jar:git-Paper-358]
-        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1101
-) ~[paper-1.19.3.jar:git-Paper-358]
-        at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:
-316) ~[paper-1.19.3.jar:git-Paper-358]
+[08:01:18 ERROR]: Error occurred while enabling WorldSystem v2.4.33 (Is it up to date?)
+java.lang.NullPointerException: Cannot invoke "org.bukkit.command.PluginCommand.setExecutor(org.bukkit.command.CommandExecutor)" because the return value of "de.butzlabben.WorldSystem.getCommand(String)" is null
+        at de.butzlabben.WorldSystem.onEnable(WorldSystem.java:99) ~[WorldSystem-2.4.33-SNAPSHOT-6.jar:?]
+        at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:264) ~[paper-api-1.19.3-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader.java:371) ~[paper-api-1.19.3-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:544) ~[paper-api-1.19.3-R0.1-SNAPSHOT.jar:?]
+        at org.bukkit.craftbukkit.v1_19_R2.CraftServer.enablePlugin(CraftServer.java:578) ~[paper-1.19.3.jar:git-Paper-358]
+        at org.bukkit.craftbukkit.v1_19_R2.CraftServer.enablePlugins(CraftServer.java:492) ~[paper-1.19.3.jar:git-Paper-358]
+        at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:635) ~[paper-1.19.3.jar:git-Paper-358]
+        at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:434) ~[paper-1.19.3.jar:git-Paper-358]
+        at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:301) ~[paper-1.19.3.jar:git-Paper-358]
+        at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1101) ~[paper-1.19.3.jar:git-Paper-358]
+        at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:316) ~[paper-1.19.3.jar:git-Paper-358]
         at java.lang.Thread.run(Thread.java:833) ~[?:?]
