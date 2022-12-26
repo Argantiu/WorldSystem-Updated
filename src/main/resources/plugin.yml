@@ -33,13 +33,37 @@ permissions:
       ws.lag: true
       ws.big: true
       ws.large: true
+  ws.get:
+    description: You can create a world via /ws get
+    default: true
+  ws.sethome:
+    description: You can set a different worldspawn
+    default: true
   ws.tp:
-    description: Teleportation
+    description: You can teleport everything
     default: op
     children:
       ws.tp.toother: true
       ws.tp.other: true
       ws.tp.world: true
+  ws.tp.world:
+    description: You can teleport to without rights World
+    default: op
+  ws.tp.toother:
+    description: You can teleport across worlds
+    default: op
+  ws.tp.other:
+    description: You can teleport other persons
+    default: op
+  ws.gamemode:
+    description: You can change GameMode on other worlds
+    default: op
+  ws.delete:
+    description: You can delete a world
+    default: op
+  ws.build:
+    description: You can build on other Worlds without WorldPermissions
+    default: op
   ws.large:
     description: World size
     default: op
@@ -50,7 +74,4 @@ permissions:
     default: op
   ws.lag:
     description: You can see lag messages
-    default: op
-  ws.:
-    description: You can teleport to without rights World
     default: op
