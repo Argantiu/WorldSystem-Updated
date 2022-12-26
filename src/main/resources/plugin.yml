@@ -6,11 +6,11 @@ authors: [Butzlabben, CrazyCloudCraft]
 website: https://github.com/CrazyCloudCraft/worldsystem-updated-old
 load: STARTUP
 depend:
-- WorldEdit
-- FAWE
 - Vault
 softdepend:
 - EssentialsX
+- WorldEdit
+- FAWE
 commands:
   ws:
     description: All WorldSystem commands
