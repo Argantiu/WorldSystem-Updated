@@ -8,6 +8,8 @@ depend:
 - WorldEdit
 - FAWE
 - Vault
+softdepend:
+- EssentialsX
 commands:
   ws:
     description: All WorldSystem commands
@@ -31,4 +33,24 @@ permissions:
       ws.lag: true
       ws.big: true
       ws.large: true
-
+  ws.tp:
+    description: Teleportation
+    default: op
+    children:
+      ws.tp.toother: true
+      ws.tp.other: true
+      ws.tp.world: true
+  ws.large:
+    description: World size
+    default: op
+    children:
+      ws.big: true
+  ws.big:
+    description: Gives you a bigger world (if set)
+    default: op
+  ws.lag:
+    description: You can see lag messages
+    default: op
+  ws.:
+    description: You can teleport to without rights World
+    default: op
