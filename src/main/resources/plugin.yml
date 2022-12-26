@@ -4,3 +4,31 @@ version: '2.4.33'
 author: Trainerlord
 authors: [Butzlabben, CrazyCloudCraft]
 website: https://github.com/CrazyCloudCraft/worldsystem-updated-old
+depend:
+- WorldEdit
+- FAWE
+- Vault
+commands:
+  ws:
+    description: All WorldSystem commands
+    permission: ws.*
+    permission-message: You have no rights to use /ws.
+    usage: /ws
+permissions:
+  ws.*:
+    description: Gives all permissions
+    default: op
+    children:
+      ws.tp.*: true
+      ws.get: true
+      ws.sethome: true
+      ws.tp.world: true
+      ws.tp.toother: true
+      ws.tp.other: true
+      ws.build: true
+      ws.gamemode: true
+      ws.delete: true
+      ws.lag: true
+      ws.big: true
+      ws.large: true
+
