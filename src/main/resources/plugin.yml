@@ -4,6 +4,7 @@ version: '2.4.33'
 author: Trainerlord
 authors: [Butzlabben, CrazyCloudCraft]
 website: https://github.com/CrazyCloudCraft/worldsystem-updated-old
+api-version: 1.18
 load: STARTUP
 depend:
 - Vault
