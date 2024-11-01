@@ -5,6 +5,8 @@ import com.google.common.base.Preconditions;
 import de.butzlabben.world.config.PluginConfig;
 import de.butzlabben.world.util.database.DatabaseProvider;
 import de.butzlabben.world.util.database.DatabaseUtil;
+
+import org.apache.commons.lang3.ObjectUtils.Null;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -79,6 +81,24 @@ public class PlayerWrapper {
     }
 
     public static OfflinePlayer getOfflinePlayer(String name) {
+        Player player = Bukkit.getPlayer(name); // Check if the player is currently online
+        if (player != null) {
+            // Return the OfflinePlayer using the online player's UUID
+            return Bukkit.getOfflinePlayer(player.getUniqueId());
+        }
+    
+        // If the player is not online, attempt to get the UUID from the database
+        UUID uuid = PlayerWrapper.getUUID(name);
+        if (uuid != null) {
+            return Bukkit.getOfflinePlayer(uuid);
+        }
+    
+        // If the UUID is not in the database, return null or handle accordingly
+        return null;
+    }
+
+    /*
+    public static OfflinePlayer getOfflinePlayer(String name) {
         Player player = Bukkit.getPlayer(name);
         if(player != null)
             return Bukkit.getOfflinePlayer(player.getUniqueId());
@@ -88,7 +108,7 @@ public class PlayerWrapper {
             return Bukkit.getOfflinePlayer(uuid);
 
         return Bukkit.getOfflinePlayer(name);
-    }
+    }*/
 
     public static OfflinePlayer getOfflinePlayer(UUID uuid) {
         return Bukkit.getOfflinePlayer(uuid);

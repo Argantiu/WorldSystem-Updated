@@ -15,7 +15,7 @@ public class VersionUtil {
     private VersionUtil() {
     }
 
-    public static int getVersion() {
+    /*public static int getVersion() {
         if (version == 0) {
             // Detect version
             String v = Bukkit.getVersion();
@@ -44,7 +44,33 @@ public class VersionUtil {
             version = 12;
         }
         return version;
-    }
+    }*/
+
+    public static int getVersion() {
+        if (version == 0) {
+            // Detect version
+            String v = Bukkit.getVersion();
+            
+            // Extract minor version number
+            int minorVersion = 0;
+            if (v.matches(".*1\\.(\\d+).*")) {
+                minorVersion = Integer.parseInt(v.replaceAll(".*1\\.(\\d+).*", "$1"));
+            }
+    
+            // Set version based on minor version number
+            switch (minorVersion) {
+                case 21 -> version = 21;
+                case 20 -> version = 20;
+                case 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3 -> version = minorVersion;
+                default -> {
+                    System.err.println("[WorldSystem] Unknown version: " + v);
+                    System.err.println("[WorldSystem] Choosing version 1.12.2");
+                    version = 12; // Default to 1.12 if version is unrecognized
+                }
+            }
+        }
+        return version;
+    }    
 
     public static boolean isCancelled(BukkitTask task) {
         if (getVersion() <= 12)
