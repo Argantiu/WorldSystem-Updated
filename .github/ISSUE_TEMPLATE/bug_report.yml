@@ -28,14 +28,11 @@ body:
       description: Which server version version you using? If your server version is not listed, it is not supported. Update to a supported version first.
       multiple: false
       options:
-        - '1.20.4'
-        - '1.20.2'
-        - '1.19.3'
-        - '1.19.2'
-        - '1.19.1'
-        - '1.19'
+        - 'above 1.21.3'
+        - '1.21.3'
+        - '1.20.6'
+        - '1.19.4'
         - '1.18.2'
-        - '1.18.1'
         - '1.17.1'
         - '1.16.5'
     validations:
@@ -75,7 +72,7 @@ body:
   - type: input
     attributes:
       label: Error log (if applicable)
-      description: If you are reporting a console error, upload any relevant log excerpts to either https://paste.gg/ or https://gist.github.com, save and the paste the link in this box.
+      description: If you are reporting a console error, upload any relevant log excerpts to https://gist.github.com, save and paste the link in this box.
 
   - type: dropdown
     attributes:
@@ -83,7 +80,9 @@ body:
       description: What version of WorldSystem are you running? (`/ws help`)
       multiple: false
       options:
-        - '2.4.37 (dev)'
+        - '2.4.39 (dev)'
+        - '2.4.38'
+        - '2.4.37'
         - '2.4.36'
     validations:
       required: true
