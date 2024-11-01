@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://raw.githubusercontent.com/Argantiu/WorldSystem-dev/master/.github/Worldsystemlogo_renewed.png" width="500"></br>
-<img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-dev/total?color=green&label=All%20Downloads&style=plastic" />
-<img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-dev/v2.4.38-dev/total?style=plastic&label=v2.4.38%20(latest)" /></br>
+<img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-Updated/total?color=green&label=All%20Downloads&style=plastic" />
+<img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-Updated/v2.4.38-dev/total?style=plastic&label=v2.4.38%20(latest)" /></br>
   <strong>A spigot plugin to give every user his own world</strong></br>
   1.7 - 1.21.3 Support
 
