@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
+import org.bukkit.GameRule;
 
 public class WorldInitSkipSpawn implements Listener {
 
@@ -18,8 +19,7 @@ public class WorldInitSkipSpawn implements Listener {
             return;
 
         SettingsConfig.editWorld(world);
-        // e.getWorld().setKeepSpawnInMemory(false);
-        e.getWorld().setKeepSpawnInMemory(false);
+        //e.getWorld().setKeepSpawnInMemory(false);
+        world.setGameRule(GameRule.SPAWN_CHUNK_RADIUS, 0);
     }
-
 }
