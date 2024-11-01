@@ -6,19 +6,19 @@ plugins {
     id 'jacoco'
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
+sourceCompatibility = 21
+targetCompatibility = 21
 
 ext {
-    mcVersion = "1.20.4"
+    mcVersion = "1.21.3"
 }
 archivesBaseName = "WorldSystem"
-version = "2.4.37"
+version = "2.4.38"
 spigot {
 group "de.butzlabben"
 name = "WorldSystem"
-authors = [" Trainerlord, Butzlabben & CrazyCloudCraft "]
-apiVersion = "1.20"
+authors = [" Trainerlord, Butzlabben & N1klasse "]
+apiVersion = "1.21"
 depends = ["WorldEdit"]
 load = STARTUP
 	commands {
@@ -119,8 +119,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.yaml:snakeyaml:2.2")
-    implementation("net.kyori:adventure-text-minimessage:4.16.0")
+    implementation("org.yaml:snakeyaml:2.3")
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
     compileOnly lombok()
     annotationProcessor lombok()
     //Test dependencies
@@ -129,17 +129,17 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.+'
     testImplementation lombok()
     testAnnotationProcessor lombok()
-    implementation group: 'commons-io', name: 'commons-io', version: '2.15.1'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.17.0'
 
-    compileOnly("me.clip:placeholderapi:2.11.5")
+    compileOnly("me.clip:placeholderapi:2.11.6")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("com.mojang:authlib:1.5.26")
-    compileOnly("org.projectlombok:lombok:1.18.30")
-    compileOnly("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.2.21-SNAPSHOT")
-    compileOnly("com.sk89q.worldedit:worldedit-core:7.2.21-SNAPSHOT")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.9.0")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.9.0")
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    compileOnly("org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.6-SNAPSHOT")
+    compileOnly("com.sk89q.worldedit:worldedit-core:7.3.6-SNAPSHOT")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.12.0")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.12.0")
 }
 shadowJar {
     minimize()
@@ -149,7 +149,7 @@ javadoc {
     options.links(
             'https://javadoc.io/static/org.jetbrains/annotations/20.1.0/',
             'https://docs.oracle.com/javase/17/docs/api/',
-            'https://papermc.io/javadocs/paper/1.20/'
+            'https://papermc.io/javadocs/paper/1.21.3/'
     )
     source = sourceSets.main.allJava
     include("**/api/*")
