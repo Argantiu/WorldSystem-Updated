@@ -10,7 +10,7 @@ import de.butzlabben.world.util.database.DatabaseProvider;
 // import de.butzlabben.world.wrapper.AsyncCreatorAdapter; // Since FAWE 2.0 this do nothing
 import de.butzlabben.world.wrapper.CreatorAdapter;
 import de.butzlabben.world.wrapper.SystemWorld;
-// import org.bstats.bukkit.Metrics; // Argantiu Development hates bstats, cause of data privecy. Also it isn't working.
+// import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -145,7 +145,7 @@ public class WorldSystem extends JavaPlugin {
         }, 20 * 60 * 2, 20 * 60 * 2);
 
         //COMMANDS
-        System.out.println("Registered");
+        //System.out.println("Registered");
 
         //this.getCommand("ws").setExecutor(new WSCommandMain());
         //this.getCommand("ws").setExecutor(new CommandMain());
@@ -169,8 +169,8 @@ public class WorldSystem extends JavaPlugin {
                 && !is1_13Plus) {
 
             // creator = new AsyncCreatorAdapter(); // Since FAWE 2.0 this do nothing
-            Bukkit.getConsoleSender()
-                    .sendMessage(PluginConfig.getPrefix() + "Found FAWE! Worlds now will be created asynchronously");
+            //Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "Found FAWE! Worlds now will be created asynchronously");
+            Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "Found FAWE! Worlds now will be created asynchronously");
         } else {
             creator = (c, sw, r) -> {
                 Bukkit.getWorlds().add(c.createWorld());
@@ -205,8 +205,7 @@ public class WorldSystem extends JavaPlugin {
         // Close database connection
         DatabaseProvider.instance.util.close();
 
-        Bukkit.getConsoleSender()
-                .sendMessage(PluginConfig.getPrefix() + "Successfully disabled WorldSystem v" + version);
+        Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "Successfully disabled WorldSystem v" + version);
     }
 
     public CreatorAdapter getAdapter() {

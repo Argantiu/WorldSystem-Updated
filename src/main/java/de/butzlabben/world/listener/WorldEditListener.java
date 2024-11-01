@@ -6,12 +6,12 @@ import de.butzlabben.world.config.WorldPerm;
 import de.butzlabben.world.wrapper.WorldPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 
 public class WorldEditListener implements Listener {
 
-    private final List<String> worldEditCommands= new ArrayList<>();
+    private final List<String> worldEditCommands = new ArrayList<>();
 
     public WorldEditListener() {
         try {
-            String packageName = Bukkit.getServer().getClass().getPackage().getName();
-            String version = packageName.substring(packageName.lastIndexOf(".") + 1);
-            Class<?> serverClass = Class.forName("org.bukkit.craftbukkit." + version + ".CraftServer");
+            //String packageName = Bukkit.getServer().getClass().getPackage().getName();
+            //String version = packageName.substring(packageName.lastIndexOf(".") + 1);
+            Class<?> serverClass = Class.forName("org.bukkit.craftbukkit.CraftServer");
 
             Field f1 = serverClass.getDeclaredField("commandMap");
             f1.setAccessible(true);
@@ -42,6 +42,29 @@ public class WorldEditListener implements Listener {
             e.printStackTrace();
         }
     }
+    /*public WorldEditListener() {
+        try {
+            // Use reflection to access the CommandMap
+            Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+            commandMapField.setAccessible(true);
+            CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+
+            // Retrieve all known commands
+            Field knownCommandsField = commandMap.getClass().getDeclaredField("knownCommands");
+            knownCommandsField.setAccessible(true);
+            @SuppressWarnings("unchecked")
+            Map<String, Command> knownCommands = (Map<String, Command>) knownCommandsField.get(commandMap);
+
+            // Filter and collect WorldEdit commands
+            worldEditCommands.addAll(
+                knownCommands.keySet().stream()
+                    .filter(key -> key.toLowerCase().contains("worldedit"))
+                    .collect(Collectors.toList())
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 
     @EventHandler
     public void playerCommandHandler(PlayerCommandPreprocessEvent event) {
@@ -63,7 +86,6 @@ public class WorldEditListener implements Listener {
     }
 
     private boolean isWorldEditCommand(String command) {
-        System.out.println(command);
         return worldEditCommands.contains(command)
                 || worldEditCommands.contains(command.replaceFirst("/", ""))
                 || worldEditCommands.contains(command.replaceFirst("/worldedit:", ""));
