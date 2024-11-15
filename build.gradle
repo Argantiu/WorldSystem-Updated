@@ -19,7 +19,7 @@ ext { // Dependency versions
     FAWE = "2.12.0"
     VaultAPI = "1.7.1"
     PlaceholderAPI = "2.11.6"
-    Lombok = "1.18.34"
+    Lombok = "1.18.36"
     CommonsIO = "2.17.0"
     Minimessage = "4.17.0"
     SnakeYAML = "2.3"
