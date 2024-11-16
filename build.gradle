@@ -1,18 +1,16 @@
 plugins {
     id 'com.gradleup.shadow' version '8.3.5'
-    id 'io.freefair.lombok' version '8.10.2'
+    id 'io.freefair.lombok' version '8.11'
     id 'java'
     id 'jacoco'
     id 'base'
 }
 
-group = "de.butzlabben"
-version = "2.4.38"
 java { 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.toVersion(project.javaVersion)
+    targetCompatibility = JavaVersion.toVersion(project.javaVersion)
 }
-ext { // Dependency versions
+/* ext { // Dependency versions
     SpigotAPI = "1.21.3-R0.1-SNAPSHOT"
     AuthLib = "1.5.26"
     WorldEdit = "7.3.6-SNAPSHOT"
@@ -23,77 +21,87 @@ ext { // Dependency versions
     CommonsIO = "2.17.0"
     Minimessage = "4.17.0"
     SnakeYAML = "2.3"
-}
+} */
 base { 
-    archivesName = "WorldSystem" 
+    archivesName = "${project.pluginname}" 
 }
 
 
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
-    maven { url "https://libraries.minecraft.net" }
-    maven { url "https://repo.onarandombox.com/content/groups/public/" }
-    maven { url "https://hub.spigotmc.org/nexus/content/repositories/public/" }
-    maven { url "https://mvn.intellectualsites.com/content/repositories/releases/" }
+    //maven { url "https://libraries.minecraft.net" }
+    //maven { url "https://hub.spigotmc.org/nexus/content/repositories/public/" }
     // Plugin repositories
     maven { url "https://repo.extendedclip.com/content/repositories/placeholderapi/" }
-    maven { url "https://ci.athion.net/job/FastAsyncWorldEdit/ws" }
+    //maven { url "https://ci.athion.net/job/FastAsyncWorldEdit/ws" }
     maven { url "https://maven.enginehub.org/repo/" }
 }
 
 dependencies {
     // YAML Parser
-    implementation("org.yaml:snakeyaml:${SnakeYAML}")
+    implementation("org.yaml:snakeyaml:${project.SnakeYAML}")
     
     // Adventure API for text formatting
-    implementation("net.kyori:adventure-text-minimessage:${Minimessage}")
+    implementation("net.kyori:adventure-text-minimessage:${project.Minimessage}")
     
     // Lombok for code generation
-    compileOnly "org.projectlombok:lombok:${Lombok}"
-    annotationProcessor "org.projectlombok:lombok:${Lombok}"
+    compileOnly "org.projectlombok:lombok:${project.Lombok}"
+    annotationProcessor "org.projectlombok:lombok:${project.Lombok}"
 
     // Commons IO library
-    implementation "commons-io:commons-io:${CommonsIO}"
+    implementation "commons-io:commons-io:${project.CommonsIO}"
 
     // Compile-only dependencies
-    compileOnly("me.clip:placeholderapi:${PlaceholderAPI}")
-    compileOnly("com.github.MilkBowl:VaultAPI:${VaultAPI}")
-    compileOnly("com.mojang:authlib:${AuthLib}")
-    compileOnly("org.spigotmc:spigot-api:${SpigotAPI}")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${WorldEdit}")
-    compileOnly("com.sk89q.worldedit:worldedit-core:${WorldEdit}")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:${FAWE}")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:${FAWE}")
+    compileOnly("me.clip:placeholderapi:${project.PlaceholderAPI}")
+    compileOnly("com.github.MilkBowl:VaultAPI:${project.VaultAPI}")
+    compileOnly("com.mojang:authlib:${project.AuthLib}")
+    compileOnly("org.spigotmc:spigot-api:${project.SpigotAPI}")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${project.WorldEdit}")
+    compileOnly("com.sk89q.worldedit:worldedit-core:${project.WorldEdit}")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:${project.FAWE}")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:${project.FAWE}")
 
     // Test dependencies
     testImplementation 'org.junit.jupiter:junit-jupiter:5.+'
     testImplementation "org.mockito:mockito-core:5.+"
     testImplementation 'org.assertj:assertj-core:3.+'
-    testImplementation "org.projectlombok:lombok:${Lombok}"
-    testAnnotationProcessor "org.projectlombok:lombok:${Lombok}"
+    testImplementation "org.projectlombok:lombok:${project.Lombok}"
+    testAnnotationProcessor "org.projectlombok:lombok:${project.Lombok}"
 }
 
 processResources {
-    project.properties.put("version", this.version)  // Add version to properties
+    //project.properties.put("version", this.version)  // Add version to properties
     expand project.properties  // Replace placeholders in resources
     from(sourceSets.main.resources.srcDirs) {
         include 'plugin.yml'  // Ensure plugin.yml is included
         duplicatesStrategy DuplicatesStrategy.INCLUDE  // Handle duplicates
+    }
+    filesMatching('plugin.yml') {
+        expand (
+            pluginname: project.pluginname,
+            group: project.group,
+            version: project.version,
+            authors: project.authors,
+            description: project.description,
+            apiversion: project.apiversion,
+            depend: project.depend,
+            softdepend: project.softdepend,
+        )
     }
 }
 
 shadowJar {
     minimize()
     archiveClassifier.set('')
-    archiveFileName.set("${project.name}-${project.version}.jar")
+    archiveFileName.set("${project.pluginname}-${project.version}.jar")
 }
 
 javadoc {
     options.links(
-            'https://javadoc.io/static/org.jetbrains/annotations/20.1.0/',
-            'https://docs.oracle.com/javase/17/docs/api/',
-            'https://papermc.io/javadocs/paper/1.21.3/'
+            "https://javadoc.io/static/org.jetbrains/annotations/20.1.0/",
+            "https://docs.oracle.com/javase/${project.javaVersion}/docs/api/",
+            "https://papermc.io/javadocs/paper/${project.minecraft}/"
     )
     source = sourceSets.main.allJava
     include("**/api/*")
