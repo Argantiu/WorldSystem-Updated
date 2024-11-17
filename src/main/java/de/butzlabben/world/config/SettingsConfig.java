@@ -1,7 +1,18 @@
 package de.butzlabben.world.config;
 
-import de.butzlabben.world.WorldSystem;
-import de.butzlabben.world.wrapper.SystemWorld;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Location;
@@ -10,12 +21,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.wrapper.SystemWorld;
 
 //maybe just merge this config with the WorldConfig
 public class SettingsConfig {
@@ -175,7 +182,7 @@ public class SettingsConfig {
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("settings.yml");
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
-                System.err.println("Wasn't able to create Config");
+                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create Config");
                 e.printStackTrace();
             }
         }

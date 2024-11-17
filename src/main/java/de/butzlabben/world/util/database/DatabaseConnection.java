@@ -1,8 +1,14 @@
 package de.butzlabben.world.util.database;
 
-import lombok.Getter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
 
-import java.sql.*;
+import de.butzlabben.world.WorldSystem;
+import lombok.Getter;
 
 public abstract class DatabaseConnection implements DatabaseUtil {
 
@@ -14,12 +20,12 @@ public abstract class DatabaseConnection implements DatabaseUtil {
         synchronized (lock) {
             try {
                 if (connection == null || connection.isClosed()) {
-                    System.err.println("[WorldSystem | DB] Connection does not exist or was already closed");
+                    WorldSystem.logger().log(Level.SEVERE,"[WorldSystem | DB] Connection does not exist or was already closed");
                     return;
                 }
                 connection.close();
             } catch (SQLException e) {
-                System.err.println("[WorldSystem | DB] Connection could not be closed");
+                WorldSystem.logger().log(Level.WARNING,"[WorldSystem | DB] Connection could not be closed");
                 e.printStackTrace();
             }
         }

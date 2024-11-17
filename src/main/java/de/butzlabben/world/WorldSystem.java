@@ -1,25 +1,33 @@
 package de.butzlabben.world;
 
-import de.butzlabben.world.command.CommandRegistry;
-import de.butzlabben.world.config.*;
-import de.butzlabben.world.listener.*;
-import de.butzlabben.world.util.PapiExtension;
-import de.butzlabben.world.util.PlayerPositions;
-import de.butzlabben.world.util.VersionUtil;
-import de.butzlabben.world.util.database.DatabaseProvider;
-// import de.butzlabben.world.wrapper.AsyncCreatorAdapter; // Since FAWE 2.0 this do nothing
-import de.butzlabben.world.wrapper.CreatorAdapter;
-import de.butzlabben.world.wrapper.SystemWorld;
-// import org.bstats.bukkit.Metrics;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-
+import de.butzlabben.world.command.CommandRegistry;
+import de.butzlabben.world.config.DependenceConfig;
+import de.butzlabben.world.config.GuiConfig;
+import de.butzlabben.world.config.MessageConfig;
+import de.butzlabben.world.config.PluginConfig;
+import de.butzlabben.world.config.SettingsConfig;
+import de.butzlabben.world.listener.BlockListener;
+import de.butzlabben.world.listener.CommandListener;
+import de.butzlabben.world.listener.PlayerListener;
+import de.butzlabben.world.listener.WorldEditListener;
+import de.butzlabben.world.listener.WorldInitSkipSpawn;
+import de.butzlabben.world.util.PapiExtension;
+import de.butzlabben.world.util.PlayerPositions;
+import de.butzlabben.world.util.VersionUtil;
+import de.butzlabben.world.util.database.DatabaseProvider;
+import de.butzlabben.world.wrapper.CreatorAdapter;
+import de.butzlabben.world.wrapper.SystemWorld;
 /**
  * @author Butzlabben
  * @author Jubeki
@@ -70,7 +78,7 @@ public class WorldSystem extends JavaPlugin {
             try {
                 dconfig.createNewFile();
             } catch (IOException e) {
-                System.err.println("Wasn't able to create DependenceConfig");
+                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create DependenceConfig");
                 e.printStackTrace();
             }
             new DependenceConfig();
@@ -87,8 +95,14 @@ public class WorldSystem extends JavaPlugin {
         GuiConfig.checkConfig(gui);
     }
 
+    
+
     public static WorldSystem getInstance() {
         return JavaPlugin.getPlugin(WorldSystem.class);
+    }
+    
+    public static Logger logger() {
+        return WorldSystem.getPlugin(WorldSystem.class).getLogger();
     }
 
     @Override
@@ -145,7 +159,7 @@ public class WorldSystem extends JavaPlugin {
         }, 20 * 60 * 2, 20 * 60 * 2);
 
         //COMMANDS
-        //System.out.println("Registered");
+        WorldSystem.logger().log(Level.INFO,"Registered");
 
         //this.getCommand("ws").setExecutor(new WSCommandMain());
         //this.getCommand("ws").setExecutor(new CommandMain());

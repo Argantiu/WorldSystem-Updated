@@ -1,8 +1,18 @@
 package de.butzlabben.world.config;
 
-import de.butzlabben.world.WorldSystem;
-import de.butzlabben.world.util.PlayerPositions;
-import net.md_5.bungee.api.ChatColor;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -11,12 +21,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.util.PlayerPositions;
+import net.md_5.bungee.api.ChatColor;
 
 public class PluginConfig {
 
@@ -68,7 +75,7 @@ public class PluginConfig {
                                     + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".yml").toPath(),
                             StandardCopyOption.REPLACE_EXISTING);
                     Files.delete(file.toPath());
-                    System.err.println("[WorldSystem] Config is broken, creating a new one!");
+                    WorldSystem.logger().log(Level.SEVERE,"[WorldSystem] Config is broken, creating a new one!");
                     checkConfig(f);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -79,7 +86,7 @@ public class PluginConfig {
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("config.yml");
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
-                System.err.println("Wasn't able to create Config");
+                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create Config");
                 e.printStackTrace();
             }
         }
