@@ -84,7 +84,7 @@ shadowJar {
 javadoc {
     options.links(
             "https://javadoc.io/static/org.jetbrains/annotations/20.1.0/",
-            "https://docs.oracle.com/javase/${project.javaVersion}/docs/api/",
+            "https://docs.oracle.com/javase/21/docs/api/",
             "https://papermc.io/javadocs/paper/${project.minecraft}/"
     )
     source = sourceSets.main.allJava
