@@ -13,7 +13,7 @@
             <maven.compiler.target>21</maven.compiler.target>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <pluginname>WorldSystem</pluginname>
-            <group>${group}</group>
+            <group>de.butzlabben</group>
             <authors>[Butzlabben, Trainerlord, Cycodly]</authors>
             <description>WorldSystem plugin to create per player worlds</description>
             <apiversion>1.21</apiversion>
