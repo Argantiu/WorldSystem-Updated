@@ -8,8 +8,8 @@ plugins {
 }
 
 java { 
-    sourceCompatibility = JavaVersion.toVersion(project.javaVersion)
-    targetCompatibility = JavaVersion.toVersion(project.javaVersion)
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 base { 
     archivesName = "${project.pluginname}" 

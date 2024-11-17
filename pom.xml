@@ -12,14 +12,14 @@
             <maven.compiler.source>21</maven.compiler.source>
             <maven.compiler.target>21</maven.compiler.target>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-            <pluginname>WorldSystem</pluginname>
-            <group>de.butzlabben</group>
-            <authors>[Butzlabben, Trainerlord, Cycodly]</authors>
-            <description>WorldSystem plugin to create per player worlds</description>
-            <apiversion>1.21</apiversion>
-            <minecraft>1.21.3</minecraft>
-            <depend>[WorldEdit]</depend>
-            <softdepend>[PlaceholderAPI, Vault]</softdepend>
+            <pluginname>${project.pluginname}</pluginname>
+            <group>${project.group}</group>
+            <authors>${project.authors}</authors>
+            <description>${project.description}</description>
+            <apiversion>${project.apiversion}</apiversion>
+            <minecraft>${project.minecraft}</minecraft>
+            <depend>${project.depend}</depend>
+            <softdepend>${project.softdepend}</softdepend>
         </properties>
 
         <repositories>
@@ -70,13 +70,6 @@
         <artifactId>lombok</artifactId>
         <version>1.18.34</version>
         <scope>provided</scope> <!-- compileOnly in Gradle entspricht 'provided' in Maven -->
-    </dependency>
-
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <version>1.18.34</version>
-        <scope>test</scope> <!-- für Test-Annotation-Processing -->
     </dependency>
 
     <!-- Commons IO library -->
@@ -147,22 +140,55 @@
     <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>5.+</version>
+        <version>5.11.3</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>5.+</version>
+        <version>5.14.2</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.+</version>
+        <version>3.26.3</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <executions>
+                <execution>
+                    <phase>initialize</phase>
+                    <goals>
+                        <goal>read-project-properties</goal>
+                    </goals>
+                    <configuration>
+                        <files>
+                            <file>./gradle.properties</file>
+                        </files>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+
+    <resources>
+        <resource>
+        <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            <includes>
+                <include>plugin.yml</include>
+            </includes>
+        </resource>
+    </resources>
+</build>
 </project>
