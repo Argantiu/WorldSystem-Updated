@@ -9,9 +9,28 @@
         <version>2.4.39</version>
 
         <properties>
-            <maven.compiler.source>21</maven.compiler.source>
-            <maven.compiler.target>21</maven.compiler.target>
+            <!-- Dependencies -->
+            <SpigotAPI>1.21.3-R0.1-SNAPSHOT</SpigotAPI>
+            <AuthLib>1.5.26</AuthLib>
+            <WorldEdit>7.3.6-SNAPSHOT</WorldEdit>
+            <FAWE>2.12.0</FAWE>
+            <VaultAPI>1.7.1</VaultAPI>
+            <PlaceholderAPI>2.11.6</PlaceholderAPI>
+            <Lombok>1.18.34</Lombok>
+            <CommonsIO>2.17.0</CommonsIO>
+            <Minimessage>4.17.0</Minimessage>
+            <SnakeYAML>2.3</SnakeYAML>
+
+            <!-- Test dependencies -->
+            <junitjupiter>5.11.3</junitjupiter>
+            <mockitocore>5.14.2</mockitocore>
+            <assertjcore>3.26.3</assertjcore>
+
+            <!-- Compiler information (java version and encoding type) -->
+            <maven.compiler.release>21</maven.compiler.release>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            
+            <!-- These variables can be set in gradle.properties -->
             <pluginname>${project.pluginname}</pluginname>
             <group>${project.group}</group>
             <authors>${project.authors}</authors>
@@ -54,85 +73,85 @@
     <dependency>
         <groupId>org.yaml</groupId>
         <artifactId>snakeyaml</artifactId>
-        <version>2.3</version>
+        <version>${SnakeYAML}</version>
     </dependency>
 
     <!-- Adventure API for text formatting -->
     <dependency>
         <groupId>net.kyori</groupId>
         <artifactId>adventure-text-minimessage</artifactId>
-        <version>4.17.0</version>
+        <version>${Minimessage}</version>
     </dependency>
 
     <!-- Lombok for code generation -->
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.34</version>
-        <scope>provided</scope> <!-- compileOnly in Gradle entspricht 'provided' in Maven -->
+        <version>${Lombok}</version>
+        <scope>provided</scope> <!-- compileOnly in Gradle is the same as 'provided' in Maven -->
     </dependency>
 
     <!-- Commons IO library -->
     <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>2.17.0</version>
+        <version>${CommonsIO}</version>
     </dependency>
 
     <!-- Compile-only dependencies -->
     <dependency>
         <groupId>me.clip</groupId>
         <artifactId>placeholderapi</artifactId>
-        <version>2.11.6</version>
-        <scope>provided</scope> <!-- compileOnly in Gradle entspricht 'provided' in Maven -->
+        <version>${PlaceholderAPI}</version>
+        <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.github.MilkBowl</groupId>
         <artifactId>VaultAPI</artifactId>
-        <version>1.7.1</version>
+        <version>${VaultAPI}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.mojang</groupId>
         <artifactId>authlib</artifactId>
-        <version>1.5.26</version>
+        <version>${AuthLib}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>org.spigotmc</groupId>
         <artifactId>spigot-api</artifactId>
-        <version>1.21.3-R0.1-SNAPSHOT</version>
+        <version>${SpigotAPI}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.sk89q.worldedit</groupId>
         <artifactId>worldedit-bukkit</artifactId>
-        <version>7.3.6-SNAPSHOT</version>
+        <version>${WorldEdit}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.sk89q.worldedit</groupId>
         <artifactId>worldedit-core</artifactId>
-        <version>7.3.6-SNAPSHOT</version>
+        <version>${WorldEdit}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.fastasyncworldedit</groupId>
         <artifactId>FastAsyncWorldEdit-Bukkit</artifactId>
-        <version>2.12.0</version>
+        <version>${FAWE}</version>
         <scope>provided</scope>
     </dependency>
 
     <dependency>
         <groupId>com.fastasyncworldedit</groupId>
         <artifactId>FastAsyncWorldEdit-Core</artifactId>
-        <version>2.12.0</version>
+        <version>${FAWE}</version>
         <scope>provided</scope>
     </dependency>
 
@@ -140,21 +159,21 @@
     <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>5.11.3</version>
+        <version>${junitjupiter}</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>5.14.2</version>
+        <version>${mockitocore}</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
-        <version>3.26.3</version>
+        <version>${assertjcore}</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
