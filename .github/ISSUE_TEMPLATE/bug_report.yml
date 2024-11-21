@@ -76,5 +76,5 @@ body:
       label: Checklist
       description: Are you using the newest build?
       options:
-        - label: I use the latest version from [Argantiu/WorldSystem-Updated](https://github.com/Argantiu/WorldSystem-Updated) and the issue still persists.
+        - label: I use the latest version from [Argantiu/WorldSystem-Updated](https://github.com/Argantiu/WorldSystem-Updated)
           required: false
