@@ -68,6 +68,7 @@ body:
     attributes:
       label: Error log (if applicable)
       description: If you are reporting a console error, upload any relevant log excerpts to https://gist.github.com, save and paste the link in this box.
+      placeholder: https://gist.github.com/...
     validations:
       required: false
 
