@@ -22,3 +22,11 @@ body:
       description: List any alternatives you might have tried.
     validations:
       required: false
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      description: Are you using the newest build?
+      options:
+        - label: I use the latest version from [Argantiu/WorldSystem-Updated](https://github.com/Argantiu/WorldSystem-Updated)
+          required: false
