@@ -3,7 +3,7 @@ package de.butzlabben.world.util;
 import de.butzlabben.world.WorldSystem;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 import de.butzlabben.world.config.DependenceConfig;
 import de.butzlabben.world.config.WorldConfig;
 import de.butzlabben.world.wrapper.SystemWorld;
@@ -21,20 +21,19 @@ public class PapiExtension extends PlaceholderExpansion {
     private final WorldSystem worldSystem = WorldSystem.getInstance();
 
     @Override
-    public @NotNull String getAuthor() {
-        return "CrazyCloudCraft";
+    public String getAuthor() {
+        return "Cycodly";
     }
 
     @Override
-    public @NotNull String getIdentifier() {
+    public String getIdentifier() {
         return "worldsystem";
     }
 
     @Override
-    public @NotNull String getVersion() {
+    public String getVersion() {
         return worldSystem.getDescription().getVersion();
     }
-
     /*
      * @Override
      * public String onRequest(OfflinePlayer player, String params) {

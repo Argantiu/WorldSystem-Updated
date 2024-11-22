@@ -35,12 +35,12 @@ public class GuiConfig {
         if (!file.exists()) {
             try {
                 String guiFileResource;
-                if (VersionUtil.getVersion() >= 14) {
-                    guiFileResource = "1_14_gui.yml";
-                } else if (VersionUtil.getVersion() == 13) {
-                    guiFileResource = "1_13_gui.yml";
+                if (VersionUtil.getVersion() >= 13) {
+                    guiFileResource = "gui.yml";
+                /* } else if (VersionUtil.getVersion() == 13) {
+                    guiFileResource = "1_13_gui.yml";*/
                 } else {
-                    guiFileResource = "old_gui.yml";
+                    guiFileResource = "legacy_gui.yml";
                 }
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource(guiFileResource);
                 Files.copy(in, file.toPath());

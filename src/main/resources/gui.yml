@@ -13,7 +13,7 @@ options:
 
   # How the disabled item should look like
   disabled:
-    material: RED_DYE
+    material: REDSTONE # RED_DYE for 1.14 and above ROSE_RED for 1.13 and below
     display: '&cDisabled'
 
   # How the comming-soon item should look like

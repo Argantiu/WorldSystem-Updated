@@ -34,7 +34,7 @@ public class WorldEditListener implements Listener {
 
             Field f2 = SimpleCommandMap.class.getDeclaredField("knownCommands");
             f2.setAccessible(true);
-            @SuppressWarnings({"unchecked", "rawtypes"})
+            //@SuppressWarnings({"unchecked", "rawtypes"})
             Map<String, Command> knownCommands = (Map) f2.get(commandMap);
             worldEditCommands.addAll(knownCommands.entrySet().stream().filter(entry -> entry.getKey().contains("worldedit"))
                     .map(entry -> entry.getValue().getName()).collect(Collectors.toList()));

@@ -30,7 +30,7 @@ import de.butzlabben.world.wrapper.WorldTemplate;
  *
  * @since 01.05.2018
  */
-@SuppressWarnings("ResultOfMethodCallIgnored")
+//@SuppressWarnings("ResultOfMethodCallIgnored")
 public class WorldConfig {
 
     private static final HashMap<String, WorldConfig> instances = new HashMap<>();

@@ -50,7 +50,7 @@ public class MessageConfig {
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("languages/" + f.getName());
 
                 if (in == null) {
-                    in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom.yml");
+                    in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom_messages.yml");
                 }
                 Files.copy(in, file.toPath());
             } catch (IOException e) {

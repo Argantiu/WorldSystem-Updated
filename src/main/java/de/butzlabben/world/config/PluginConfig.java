@@ -93,7 +93,7 @@ public class PluginConfig {
 
         // Should fix #2
         if (getSpawn(null).getWorld() == null) {
-            Bukkit.getConsoleSender().sendMessage(getPrefix() + "§cWorld is null in spawn.world!");
+            Bukkit.getConsoleSender().sendMessage(getPrefix() + "§cA lobby/hub spawn is missing. If this is not the first launch, add a spawn in config.yml");
         }
     }
 

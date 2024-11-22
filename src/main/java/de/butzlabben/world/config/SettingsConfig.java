@@ -34,7 +34,7 @@ public class SettingsConfig {
     private SettingsConfig() {
     }
 
-    @SuppressWarnings("deprecation")
+    //@SuppressWarnings("deprecation")
     // TODO rebuild this, as it's inperformant and not very beautiful code..
     // only load once, and then reload the things from the disk on command
     public static void editWorld(World w) {

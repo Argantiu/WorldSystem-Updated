@@ -47,11 +47,11 @@
                 <url>https://jitpack.io</url>
             </repository>
             <repository>
-                <id>minecraft</id>
-                <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+                <id>placeholderapi</id>
+                <url>https://repo.extendedclip.com/releases/</url>
             </repository>
             <repository>
-                <id>spigot</id>
+                <id>worldedit/id>
                 <url>https://maven.enginehub.org/repo/</url>
             </repository>
         </repositories>

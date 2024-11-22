@@ -19,7 +19,7 @@ repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
     // Plugin repositories
-    maven { url "https://repo.extendedclip.com/content/repositories/placeholderapi/" }
+    maven { url "https://repo.extendedclip.com/releases/" }
     maven { url "https://maven.enginehub.org/repo/" }
 }
 
