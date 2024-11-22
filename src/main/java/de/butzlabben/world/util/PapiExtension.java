@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PapiExtension extends PlaceholderExpansion {
+    // https://wiki.placeholderapi.com/developers/creating-a-placeholderexpansion/
 
     private final WorldSystem worldSystem = WorldSystem.getInstance();
 
