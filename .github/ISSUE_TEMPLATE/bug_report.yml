@@ -79,4 +79,4 @@ body:
       options:
         - label: I use the latest version from [Argantiu/WorldSystem-Updated](https://github.com/Argantiu/WorldSystem-Updated) 
         - label: I use the latest version from [danielbyomujuni/WorldSystem](https://github.com/danielbyomujuni/WorldSystem) and the issue still persists.
-          required: false
+      required: false
