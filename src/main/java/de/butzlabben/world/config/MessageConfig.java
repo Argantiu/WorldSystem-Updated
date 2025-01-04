@@ -1,16 +1,23 @@
 package de.butzlabben.world.config;
 
-import de.butzlabben.world.WorldSystem;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import de.butzlabben.world.WorldSystem;
+import net.md_5.bungee.api.ChatColor;
 
 public class MessageConfig {
 
@@ -43,11 +50,11 @@ public class MessageConfig {
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("languages/" + f.getName());
 
                 if (in == null) {
-                    in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom.yml");
+                    in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom_messages.yml");
                 }
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
-                System.err.println("Wasn't able to create Message file");
+                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create Message file");
                 e.printStackTrace();
             }
         }

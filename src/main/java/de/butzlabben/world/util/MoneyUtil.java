@@ -43,8 +43,10 @@ public class MoneyUtil {
         Economy economy = (Economy) MoneyUtil.economy;
         EconomyResponse response = economy.withdrawPlayer(op, money);
         if (!response.transactionSuccess()) {
-            Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "§cTransaction failure for removing " + money + " from " + op.getName());
-            Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "§cError message: " + response.errorMessage);
+            Bukkit.getConsoleSender().sendMessage(
+                    PluginConfig.getPrefix() + "§cTransaction failure for removing " + money + " from " + op.getName());
+            Bukkit.getConsoleSender()
+                    .sendMessage(PluginConfig.getPrefix() + "§cError message: " + response.errorMessage);
         }
     }
 

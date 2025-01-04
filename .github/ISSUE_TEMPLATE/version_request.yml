@@ -6,9 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        Fill out the following form to get a new release. (Hopefully)
-        Thanks to inform us about updates and dependencies. DO NOT ASK HERE TO ADD NEW FEATURES. We have other forms for that :)
-        Sometimes Plugins, Softwares and Minecraft itself updates to a new version. Because that happens very often we can't keep track of everything.
+        ### Fill out the following form to get a new release. (Hopefully)  
+        Thanks to inform us about updates and dependencies.  
+        _Sometimes Plugins, Softwares and Minecraft itself updates to a new version._  
+        _Because that happens very often we can't keep track of everything._
         
   - type: dropdown
     attributes:

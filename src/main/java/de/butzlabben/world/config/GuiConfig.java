@@ -1,8 +1,17 @@
 package de.butzlabben.world.config;
 
-import de.butzlabben.inventory.OrcItem;
-import de.butzlabben.world.WorldSystem;
-import de.butzlabben.world.util.VersionUtil;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,11 +19,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
+import de.butzlabben.inventory.OrcItem;
+import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.util.VersionUtil;
 
 public class GuiConfig {
 
@@ -28,17 +35,17 @@ public class GuiConfig {
         if (!file.exists()) {
             try {
                 String guiFileResource;
-                if (VersionUtil.getVersion() >= 14) {
-                    guiFileResource = "1_14_gui.yml";
-                } else if (VersionUtil.getVersion() == 13) {
-                    guiFileResource = "1_13_gui.yml";
+                if (VersionUtil.getVersion() >= 13) {
+                    guiFileResource = "gui.yml";
+                /* } else if (VersionUtil.getVersion() == 13) {
+                    guiFileResource = "1_13_gui.yml";*/
                 } else {
-                    guiFileResource = "old_gui.yml";
+                    guiFileResource = "legacy_gui.yml";
                 }
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource(guiFileResource);
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
-                System.err.println("Wasn't able to create Config");
+                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create Config");
                 e.printStackTrace();
             }
         }

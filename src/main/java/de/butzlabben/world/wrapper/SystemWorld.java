@@ -1,25 +1,26 @@
 
-        package de.butzlabben.world.wrapper;
+package de.butzlabben.world.wrapper;
 
-        import com.google.common.base.Preconditions;
-        import de.butzlabben.world.WorldSystem;
-        import de.butzlabben.world.config.*;
-        import de.butzlabben.world.event.WorldCreateEvent;
-        import de.butzlabben.world.event.WorldLoadEvent;
-        import de.butzlabben.world.event.WorldUnloadEvent;
-        import de.butzlabben.world.util.PlayerPositions;
-        import de.butzlabben.world.util.PlayerWrapper;
-        import de.butzlabben.world.util.VersionUtil;
-        import org.apache.commons.io.FileUtils;
-        import org.bukkit.*;
-        import org.bukkit.entity.Player;
-        import org.bukkit.scheduler.BukkitRunnable;
-        import org.bukkit.scheduler.BukkitTask;
+import com.google.common.base.Preconditions;
+import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.config.*;
+import de.butzlabben.world.event.WorldCreateEvent;
+import de.butzlabben.world.event.WorldLoadEvent;
+import de.butzlabben.world.event.WorldUnloadEvent;
+import de.butzlabben.world.util.PlayerPositions;
+import de.butzlabben.world.util.PlayerWrapper;
+import de.butzlabben.world.util.VersionUtil;
+import org.apache.commons.io.FileUtils;
+import org.bukkit.*;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-        import java.io.File;
-        import java.io.IOException;
-        import java.util.HashMap;
-        import java.util.UUID;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.logging.Level;
 
 /**
  * This class represents a systemworld, loaded or not
@@ -47,7 +48,7 @@ public class SystemWorld {
      *
      * @param worldname as in minecraft
      * @return a systemworld instance if it is a systemworld or null if is not a
-     * systemworld
+     *         systemworld
      * @throws NullPointerException worldname == null
      */
     public static SystemWorld getSystemWorld(String worldname) {
@@ -80,7 +81,6 @@ public class SystemWorld {
     public static boolean create(Player p, WorldTemplate template) {
         return create(p.getUniqueId(), template);
     }
-
 
     /**
      * Trys to create a new systemworld with all entries etc. finally loads the
@@ -119,7 +119,7 @@ public class SystemWorld {
             try {
                 FileUtils.copyDirectory(exampleworld, newworld);
             } catch (IOException e) {
-                System.err.println("Couldn't create world for " + uuid);
+                WorldSystem.logger().log(Level.SEVERE, "Couldn't create world for " + uuid);
                 e.printStackTrace();
             }
         else
@@ -145,7 +145,7 @@ public class SystemWorld {
             } catch (IOException e) {
                 if (p != null && p.isOnline())
                     p.sendMessage(PluginConfig.getPrefix() + "§cError: " + e.getMessage());
-                System.err.println("Couldn't load world of " + uuid);
+                WorldSystem.logger().log(Level.SEVERE, "Couldn't load world of " + uuid);
                 e.printStackTrace();
                 return false;
             }
@@ -311,7 +311,7 @@ public class SystemWorld {
             // Check for duplicated worlds
             File propablyExistingWorld = new File(Bukkit.getWorldContainer(), worldname);
             if (propablyExistingWorld.exists()) {
-                System.err.println("World " + worldname + " existed twice!");
+                WorldSystem.logger().log(Level.SEVERE, "World " + worldname + " existed twice!");
                 try {
                     FileUtils.deleteDirectory(propablyExistingWorld);
                 } catch (IOException e) {
@@ -320,11 +320,11 @@ public class SystemWorld {
                 }
             }
 
-            //Move world if exists
+            // Move world if exists
             try {
                 FileUtils.moveDirectoryToDirectory(world, Bukkit.getWorldContainer(), false);
             } catch (IOException e) {
-                System.err.println("Couldn't load world of " + p.getName());
+                WorldSystem.logger().log(Level.SEVERE, "Couldn't load world of " + p.getName());
                 p.sendMessage(PluginConfig.getPrefix() + "§cError: " + e.getMessage());
                 e.printStackTrace();
             }
@@ -338,7 +338,6 @@ public class SystemWorld {
             worldname = myName.toString();
         }
 
-
         WorldCreator creator = new WorldCreator(worldname);
 
         String templateKey = WorldConfig.getWorldConfig(worldname).getTemplateKey();
@@ -348,7 +347,6 @@ public class SystemWorld {
 
         if (template != null)
             creator = template.generatorSettings.asWorldCreator(worldname);
-
 
         World w = Bukkit.getWorld(worldname);
         if (w == null)
@@ -420,7 +418,8 @@ public class SystemWorld {
         if (PluginConfig.isSurvival()) {
             p.setGameMode(GameMode.SURVIVAL);
         } else {
-            p.setGameMode(GameMode.CREATIVE); //p.setGameMode(GameMode.CREATIVE); //Fixed spawn in other worlds with creative
+            p.setGameMode(GameMode.CREATIVE); // p.setGameMode(GameMode.CREATIVE); //Fixed spawn in other worlds with
+                                              // creative
         }
 
         OfflinePlayer owner = PlayerWrapper.getOfflinePlayer(WorldConfig.getWorldConfig(worldname).getOwner());

@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public class PlayersPageGUI {
 
-    @SuppressWarnings("deprecation")
+    //@SuppressWarnings("deprecation")
     public static void openGUI(Player p) {
         WorldConfig config = WorldConfig.getWorldConfig(p.getWorld().getName());
 
@@ -64,7 +64,7 @@ public class PlayersPageGUI {
         creator.show(p);
     }
 
-    @SuppressWarnings("deprecation")
+    //@SuppressWarnings("deprecation")
     public static void preloadPlayers(WorldConfig config) {
         new Thread(() -> {
             int headsPerInv = GuiConfig.getRows("options.players") * 9;

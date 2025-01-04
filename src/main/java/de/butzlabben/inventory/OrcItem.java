@@ -50,7 +50,7 @@ public class OrcItem {
         callback = r;
     }
 
-    @SuppressWarnings("deprecation")
+    //@SuppressWarnings("deprecation")
     public OrcItem setItemStack(Material mat, byte data, String display, List<String> lore) {
         is = new ItemStack(mat, 1, data);
         ItemMeta meta = is.getItemMeta();

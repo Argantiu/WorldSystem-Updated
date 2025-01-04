@@ -1,5 +1,18 @@
 package de.butzlabben.world.command.commands;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+
+import org.apache.commons.io.FileUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.WorldCreator;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import de.butzlabben.world.WorldSystem;
 import de.butzlabben.world.config.DependenceConfig;
 import de.butzlabben.world.config.MessageConfig;
@@ -14,17 +27,6 @@ import de.butzlabben.world.wrapper.SystemWorld;
 import de.butzlabben.world.wrapper.WorldPlayer;
 import de.butzlabben.world.wrapper.WorldTemplate;
 import de.butzlabben.world.wrapper.WorldTemplateProvider;
-import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.WorldCreator;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class WorldSettingsCommands {
     private static final ArrayList<Player> toConfirm = new ArrayList<>();
@@ -137,12 +139,12 @@ public class WorldSettingsCommands {
             WorldConfig config = WorldConfig.getWorldConfig(p.getWorld().getName());
             Location playerLocation = p.getLocation();
             config.home = playerLocation;
-            System.out.println("installed");
+            WorldSystem.logger().log(Level.INFO,"installed");
             try {
                 if (config.home == playerLocation) {
-                    System.out.println("registered");
+                    WorldSystem.logger().log(Level.INFO,"registered");
                 } else {
-                    System.out.println("registered incorrectly");
+                    WorldSystem.logger().log(Level.INFO,"registered incorrectly");
                 }
                 config.save();
                 p.sendMessage(MessageConfig.getHomeSet());
@@ -280,7 +282,7 @@ public class WorldSettingsCommands {
         } catch (IOException e) {
             e.printStackTrace();
             p.sendMessage(MessageConfig.getUnknownError());
-            System.err.println("Couldn't reset world of " + p.getName());
+            WorldSystem.logger().log(Level.SEVERE,"Couldn't reset world of " + p.getName());
         }
     }
 }

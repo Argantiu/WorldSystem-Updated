@@ -1,44 +1,43 @@
 plugins {
     id 'com.gradleup.shadow' version '8.3.5'
-    id 'io.freefair.lombok' version '8.10.2'
+    id 'io.freefair.lombok' version '8.11'
     id 'java'
     id 'jacoco'
     id 'base'
+    id 'maven-publish'
 }
 
-group = "de.butzlabben"
-version = "2.4.38"
 java { 
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
+base { 
+    archivesName = "${project.pluginname}" 
+}
+
 ext { // Dependency versions
     SpigotAPI = "1.21.3-R0.1-SNAPSHOT"
     AuthLib = "1.5.26"
     WorldEdit = "7.3.6-SNAPSHOT"
-    FAWE = "2.12.0"
+    FAWE = "2.12.2"
     VaultAPI = "1.7.1"
     PlaceholderAPI = "2.11.6"
     Lombok = "1.18.34"
-    CommonsIO = "2.17.0"
-    Minimessage = "4.17.0"
+    CommonsIO = "2.18.0"
+    Minimessage = "4.18.0"
     SnakeYAML = "2.3"
-}
-base { 
-    archivesName = "WorldSystem" 
-}
+    // Test dependencies
+    Jupiter= "5.+"
+    Mockito= "5.+"
+    Assertj= "3.+"
 
+}
 
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
-    maven { url "https://libraries.minecraft.net" }
-    maven { url "https://repo.onarandombox.com/content/groups/public/" }
-    maven { url "https://hub.spigotmc.org/nexus/content/repositories/public/" }
-    maven { url "https://mvn.intellectualsites.com/content/repositories/releases/" }
     // Plugin repositories
-    maven { url "https://repo.extendedclip.com/content/repositories/placeholderapi/" }
-    maven { url "https://ci.athion.net/job/FastAsyncWorldEdit/ws" }
+    maven { url "https://repo.extendedclip.com/releases/" }
     maven { url "https://maven.enginehub.org/repo/" }
 }
 
@@ -67,33 +66,44 @@ dependencies {
     compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:${FAWE}")
 
     // Test dependencies
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.+'
-    testImplementation "org.mockito:mockito-core:5.+"
-    testImplementation 'org.assertj:assertj-core:3.+'
+    testImplementation "org.junit.jupiter:junit-jupiter:${Jupiter}"
+    testImplementation "org.mockito:mockito-core:${Mockito}"
+    testImplementation "org.assertj:assertj-core:${Assertj}"
     testImplementation "org.projectlombok:lombok:${Lombok}"
     testAnnotationProcessor "org.projectlombok:lombok:${Lombok}"
 }
 
 processResources {
-    project.properties.put("version", this.version)  // Add version to properties
     expand project.properties  // Replace placeholders in resources
     from(sourceSets.main.resources.srcDirs) {
         include 'plugin.yml'  // Ensure plugin.yml is included
         duplicatesStrategy DuplicatesStrategy.INCLUDE  // Handle duplicates
+    }
+    filesMatching('plugin.yml') {
+        expand (
+            pluginname: project.pluginname,
+            group: project.group,
+            version: project.version,
+            authors: project.authors,
+            description: project.description,
+            apiversion: project.apiversion,
+            depend: project.depend,
+            softdepend: project.softdepend,
+        )
     }
 }
 
 shadowJar {
     minimize()
     archiveClassifier.set('')
-    archiveFileName.set("${project.name}-${project.version}.jar")
+    archiveFileName.set("${project.pluginname}-${project.version}.jar")
 }
 
 javadoc {
     options.links(
-            'https://javadoc.io/static/org.jetbrains/annotations/20.1.0/',
-            'https://docs.oracle.com/javase/17/docs/api/',
-            'https://papermc.io/javadocs/paper/1.21.3/'
+            "https://javadoc.io/static/org.jetbrains/annotations/20.1.0/",
+            "https://docs.oracle.com/javase/21/docs/api/",
+            "https://papermc.io/javadocs/paper/${project.minecraft}/"
     )
     source = sourceSets.main.allJava
     include("**/api/*")
@@ -112,6 +122,21 @@ test {
         events "passed", "skipped", "failed"
     }
     ignoreFailures = false
+}
+
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = "${project.pluginname}"
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
 }
 
 tasks.build.dependsOn tasks.shadowJar

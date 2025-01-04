@@ -1,7 +1,111 @@
+# Worldsystem - Let players create ther own worlds
 
+####################
+# General Settings #
+####################
+
+# Prefix which will be shown before each message
+prefix: '&8[&3WorldSystem&8] &6'
 
 # Path where the worlds will be saved
 worldfolder: 'plugins/WorldSystem/Worlds'
+
+# Name of the languagefile in plugins/WorldSystem/languages/
+language: en
+
+# If a confirm is needed before auto-update
+need_confirm: true
+
+# Whether WorldSystem should contact the Mojang authserver
+# If not, some unknown playernames will not be displayed
+# eg. in the gui or in /ws info
+contact_authserver: true
+
+# Location where you will be teleported when you leave you world
+spawn:
+  gamemode: 2
+  spawnpoint:
+    use_last_location: true
+    world: world
+    x: 0
+    y: 20
+    z: 0
+    yaw: 0
+    pitch: 0
+
+# Time in seconds until a request expires
+request_expires: 20
+
+################
+# Optimisation #
+################
+
+# If WorldSystem should load the worlds async if possible (FAWE installed)
+load_worlds_async: true
+
+# When nobody is on a world time until it get unloaded
+unloadingtime: 20
+
+# Time in days after a not used world will be deleted
+# Set to -1 to disable
+delete_after: -1
+
+# Options for the LagSystem:
+# period_in_seconds - how often will be checked for entities in seconds
+# entities_per_world - maximal allowed entities per world
+# garbagecollector - how often will be unused ram be cleared
+lagsystem:
+  period_in_seconds: 10
+  entities_per_world: 350
+  garbagecollector:
+    use: false
+    period_in_minutes: 5
+
+# Options for the database saving player positions
+database:
+  # Which type should be choosen:
+  # 'mysql' or 'sqlite'
+  # You need a working mysql database in order to use this option
+  type: sqlite
+  # How the table with the saved player positions on the playerworlds should be named
+  worlds_table_name: worlds_positions
+  # How the table with the saved player positions on the normal worlds should be named
+  players_table_name: player_positions
+  # how should the uuid cache be stored
+  players_uuids: players_uuids
+
+  # Configure here your mysql connection
+  mysql_settings:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: YOUR_PASSWORD_HERE
+    database: database
+  sqlite_settings:
+    # Where the database file should be located
+    file: 'plugins/WorldSystem/repository.db'
+
+##################
+# World settings #
+##################
+
+# If true nobody can teleport or change their gamemode a WorldSystem world
+# Except for players with the permissions: ws.gamemode | ws.tp.*
+survival: false
+
+# If true players will teleported to the spawn on join
+spawn_teleportation: true
+
+# Location where you spawn when you join a world
+worldspawn:
+  use_last_location: true
+  use: false
+  spawnpoint:
+    x: 0
+    y: 20
+    z: 0
+    yaw: 0
+    pitch: 0
 
 worldtemplates:
   # Whether players can decide on different templates
@@ -39,95 +143,3 @@ worldtemplates:
         # Put in here the name of a generator
         # If you have one from one plugin
         generator: ''
-
-# If a confirm is needed before auto-update
-need_confirm: true
-
-# When nobody is on a world time until it get unloaded
-unloadingtime: 20
-
-# If true nobody can teleport or change their gamemode a WorldSystem world
-# Except for players with the permissions: ws.gamemode | ws.tp.*
-survival: false
-
-# If WorldSystem should load the worlds async if possible (FAWE installed)
-load_worlds_async: true
-
-# Options for the database saving player positions
-database:
-  # Which type should be choosen:
-  # 'mysql' or 'sqlite'
-  # You need a working mysql database in order to use this option
-  type: sqlite
-  # How the table with the saved player positions on the playerworlds should be named
-  worlds_table_name: worlds_positions
-  # How the table with the saved player positions on the normal worlds should be named
-  players_table_name: player_positions
-  # how should the uuid cache be stored
-  players_uuids: players_uuids
-
-  # Configure here your mysql connection
-  mysql_settings:
-    host: 127.0.0.1
-    port: 3306
-    username: root
-    password: YOUR_PASSWORD_HERE
-    database: database
-  sqlite_settings:
-    # Where the database file should be located
-    file: 'plugins/WorldSystem/repository.db'
-
-# If true players will teleported to the spawn on join
-spawn_teleportation: true
-
-# Time in seconds until a request expires
-request_expires: 20
-
-# Name of the languagefile in plugins/WorldSystem/languages/
-language: en
-
-# Prefix which will be shown before each message
-prefix: '&8[&3WorldSystem&8] &6'
-
-# Time in days after a not used world will be deleted
-# Set to -1 to disable
-delete_after: -1
-
-# Whether WorldSystem should contact the Mojang authserver
-# If not, some unknown playernames will not be displayed
-# eg. in the gui or in /ws info
-contact_authserver: true
-
-# Options for the LagSystem:
-# period_in_seconds - how often will be checked for entities in seconds
-# entities_per_world - maximal allowed entities per world
-# garbagecollector - how often will be unused ram be cleared
-lagsystem:
-  period_in_seconds: 10
-  entities_per_world: 350
-  garbagecollector:
-    use: false
-    period_in_minutes: 5
-
-# Location where you will be teleported when you leave you world
-spawn:
-  gamemode: 2
-  spawnpoint:
-    use_last_location: true
-    world: world
-    x: 0
-    y: 20
-    z: 0
-    yaw: 0
-    pitch: 0
-
-# Location where you spawn when you join a world
-worldspawn:
-  use_last_location: true
-  use: false
-  spawnpoint:
-    x: 0
-    y: 20
-    z: 0
-    yaw: 0
-    pitch: 0

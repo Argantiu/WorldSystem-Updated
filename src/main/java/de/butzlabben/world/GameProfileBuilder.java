@@ -11,7 +11,7 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.HttpURLConnection; */ 
+import java.net.HttpURLConnection; */
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -45,13 +45,14 @@ public class GameProfileBuilder {
             return cache.get(uuid).profile;
         }
 
-        String url = String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", UUIDTypeAdapter.fromUUID(uuid));
+        String url = String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false",
+                UUIDTypeAdapter.fromUUID(uuid));
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .GET()
-            .timeout(java.time.Duration.ofSeconds(5)) // Set timeout for request
-            .build();
-        
+                .uri(URI.create(url))
+                .GET()
+                .timeout(java.time.Duration.ofSeconds(5)) // Set timeout for request
+                .build();
+
         synchronized (sync) {
             try {
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -67,26 +68,10 @@ public class GameProfileBuilder {
             }
         }
 
-        //DEPRECATED
-        /*HttpURLConnection connection;
-        synchronized (sync) {
-            connection = (HttpURLConnection) new URL(
-                    String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", UUIDTypeAdapter.fromUUID(uuid))).openConnection();
-            connection.setReadTimeout(5000);
-        }
-        if (connection.getResponseCode() == 200) {
-            @SuppressWarnings("resource")
-            String json = new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine();
-
-            GameProfile result = gson.fromJson(json, GameProfile.class);
-            cache.put(uuid, new CachedProfile(result));
-            return result;
-        }*/
-
         if ((!forceNew) && (cache.containsKey(uuid))) {
             return cache.get(uuid).profile;
         }
-        throw new IOException("Could not connect to mojang servers for unknown player: "+ uuid); //+ uuid.toString());
+        throw new IOException("Could not connect to mojang servers for unknown player: " + uuid); // + uuid.toString());
     }
 
     public static GameProfile getProfile(UUID uuid, String name, String skin) {

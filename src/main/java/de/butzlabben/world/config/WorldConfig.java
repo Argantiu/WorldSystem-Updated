@@ -1,10 +1,5 @@
 package de.butzlabben.world.config;
 
-import com.google.common.collect.Sets;
-import com.mojang.authlib.GameProfile;
-import de.butzlabben.world.GameProfileBuilder;
-import de.butzlabben.world.util.PlayerWrapper;
-import de.butzlabben.world.wrapper.WorldTemplate;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,11 +8,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import com.google.common.collect.Sets;
+import com.mojang.authlib.GameProfile;
+
+import de.butzlabben.world.GameProfileBuilder;
+import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.util.PlayerWrapper;
+import de.butzlabben.world.wrapper.WorldTemplate;
 
 /**
  * This class represents a worldconfig.yml file Here you can edit and read all
@@ -25,7 +30,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
  *
  * @since 01.05.2018
  */
-@SuppressWarnings("ResultOfMethodCallIgnored")
+//@SuppressWarnings("ResultOfMethodCallIgnored")
 public class WorldConfig {
 
     private static final HashMap<String, WorldConfig> instances = new HashMap<>();
@@ -90,7 +95,7 @@ public class WorldConfig {
             file.createNewFile();
         } catch (IOException e1) {
             e1.printStackTrace();
-            System.err.println("Error while creating worldconfig for " + uuid.toString());
+            WorldSystem.logger().log(Level.SEVERE,"Error while creating worldconfig for " + uuid.toString());
         }
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set("Informations.ID", dc.getID());
@@ -104,7 +109,7 @@ public class WorldConfig {
             cfg.save(file);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Error while saving worldconfig for " + uuid.toString());
+            WorldSystem.logger().log(Level.SEVERE,"Error while saving worldconfig for " + uuid.toString());
         }
     }
 

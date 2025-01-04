@@ -17,14 +17,13 @@ public class WorldTemplateProvider {
     private static final WorldTemplateProvider instance = new WorldTemplateProvider();
     private final HashMap<String, WorldTemplate> templates = new HashMap<>();
 
-
     private WorldTemplateProvider() {
         reload();
     }
 
-    public void reload(){
+    public void reload() {
         templates.clear();
-        
+
         ConfigurationSection section = PluginConfig.getConfig().getConfigurationSection("worldtemplates.templates");
         for (String key : section.getKeys(false)) {
             String name = section.getString(key + ".name");

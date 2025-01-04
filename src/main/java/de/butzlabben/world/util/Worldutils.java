@@ -7,7 +7,7 @@ import org.bukkit.World;
 
 public class Worldutils {
 
-    public static void reloadWorldSettings(){
+    public static void reloadWorldSettings() {
         for (World w : Bukkit.getWorlds()) {
             SystemWorld sw = SystemWorld.getSystemWorld(w.getName());
             if (sw != null && sw.isLoaded())

@@ -6,6 +6,8 @@ import de.butzlabben.world.config.GuiConfig;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import de.butzlabben.world.WorldSystem;
+import java.util.logging.Level;
 
 /**
  * @author Butzlabben
@@ -50,7 +52,7 @@ public class InventoryPage extends OrcInventory {
 
     public void addItem(OrcItem item) {
         if (i > 36) {
-            System.err.println("More items than allowed in page view");
+            WorldSystem.logger().log(Level.SEVERE,"More items than allowed in page view");
             return;
         }
         addItem(i, item);
