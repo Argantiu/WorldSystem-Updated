@@ -1,6 +1,8 @@
 package de.butzlabben.world.util;
 
 import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -45,9 +47,13 @@ public class PapiExtension extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, @NotNull String params) {
 
+        if (params.equalsIgnoreCase("test")) {
+            return "WorldSystem debug placeholder";
+        }
+
         DependenceConfig config = new DependenceConfig(player);
 
-        /*String[] args = params.split("_");
+        String[] args = params.split("_");
         if (args[0].equalsIgnoreCase("world") && args[1].equalsIgnoreCase("member")) {
 
             Player playerOnline = player.getPlayer();
@@ -64,38 +70,33 @@ public class PapiExtension extends PlaceholderExpansion {
                         "No placeholder named\"" + getIdentifier() + "_" + params + "\" is known");
             }
             return members.get(member);
-        }*/
+        }
 
         switch (params) {
-            case "has_world" -> 
-            {
+            case "has_world" -> {
                 return new DependenceConfig(player).hasWorld() + "";
             }
-            case "is_creator" -> 
-            {
+            case "is_creator" -> {
                 WorldPlayer user = new WorldPlayer(Objects.requireNonNull(Bukkit.getPlayer(player.getUniqueId())));
                 if (!user.isOnSystemWorld()) {
                     return "false";
                 }
                 return user.isOwnerofWorld() + "";
             }
-            case "player_world_name" -> 
-            {
+            case "player_world_name" -> {
                 if (!config.hasWorld()) {
                     return "none";
                 } else {
                     return config.getWorldname();
                 }
             }
-            case "world_loaded" -> 
-            {
+            case "world_loaded" -> {
                 if (!config.hasWorld()) {
                     return "none";
                 }
                 return Objects.requireNonNull(SystemWorld.getSystemWorld(config.getWorldname())).isLoaded() + "";
             }
-            case "display_world_name" -> 
-            {
+            case "display_world_name" -> {
                 if (!player.isOnline()) {
                     if (!config.hasWorld()) {
                         Player p1 = player.getPlayer();
@@ -113,7 +114,8 @@ public class PapiExtension extends PlaceholderExpansion {
                     return world.getName();
                 }
             }
-            default -> throw new IllegalArgumentException("No placeholder named\"" + getIdentifier() + "_" + params + "\" is known");
+            default -> throw new IllegalArgumentException(
+                    "No placeholder named\"" + getIdentifier() + "_" + params + "\" is known");
         }
     }
 }

@@ -15,6 +15,24 @@ base {
     archivesName = "${project.pluginname}" 
 }
 
+ext { // Dependency versions
+    SpigotAPI = "1.21.3-R0.1-SNAPSHOT"
+    AuthLib = "1.5.26"
+    WorldEdit = "7.3.6-SNAPSHOT"
+    FAWE = "2.12.2"
+    VaultAPI = "1.7.1"
+    PlaceholderAPI = "2.11.6"
+    Lombok = "1.18.34"
+    CommonsIO = "2.18.0"
+    Minimessage = "4.18.0"
+    SnakeYAML = "2.3"
+    // Test dependencies
+    Jupiter= "5.+"
+    Mockito= "5.+"
+    Assertj= "3.+"
+
+}
+
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
@@ -25,34 +43,34 @@ repositories {
 
 dependencies {
     // YAML Parser
-    implementation("org.yaml:snakeyaml:${project.SnakeYAML}")
+    implementation("org.yaml:snakeyaml:${SnakeYAML}")
     
     // Adventure API for text formatting
-    implementation("net.kyori:adventure-text-minimessage:${project.Minimessage}")
+    implementation("net.kyori:adventure-text-minimessage:${Minimessage}")
     
     // Lombok for code generation
-    compileOnly "org.projectlombok:lombok:${project.Lombok}"
-    annotationProcessor "org.projectlombok:lombok:${project.Lombok}"
+    compileOnly "org.projectlombok:lombok:${Lombok}"
+    annotationProcessor "org.projectlombok:lombok:${Lombok}"
 
     // Commons IO library
-    implementation "commons-io:commons-io:${project.CommonsIO}"
+    implementation "commons-io:commons-io:${CommonsIO}"
 
     // Compile-only dependencies
-    compileOnly("me.clip:placeholderapi:${project.PlaceholderAPI}")
-    compileOnly("com.github.MilkBowl:VaultAPI:${project.VaultAPI}")
-    compileOnly("com.mojang:authlib:${project.AuthLib}")
-    compileOnly("org.spigotmc:spigot-api:${project.SpigotAPI}")
-    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${project.WorldEdit}")
-    compileOnly("com.sk89q.worldedit:worldedit-core:${project.WorldEdit}")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:${project.FAWE}")
-    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:${project.FAWE}")
+    compileOnly("me.clip:placeholderapi:${PlaceholderAPI}")
+    compileOnly("com.github.MilkBowl:VaultAPI:${VaultAPI}")
+    compileOnly("com.mojang:authlib:${AuthLib}")
+    compileOnly("org.spigotmc:spigot-api:${SpigotAPI}")
+    compileOnly("com.sk89q.worldedit:worldedit-bukkit:${WorldEdit}")
+    compileOnly("com.sk89q.worldedit:worldedit-core:${WorldEdit}")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:${FAWE}")
+    compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core:${FAWE}")
 
     // Test dependencies
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.+'
-    testImplementation "org.mockito:mockito-core:5.+"
-    testImplementation 'org.assertj:assertj-core:3.+'
-    testImplementation "org.projectlombok:lombok:${project.Lombok}"
-    testAnnotationProcessor "org.projectlombok:lombok:${project.Lombok}"
+    testImplementation "org.junit.jupiter:junit-jupiter:${Jupiter}"
+    testImplementation "org.mockito:mockito-core:${Mockito}"
+    testImplementation "org.assertj:assertj-core:${Assertj}"
+    testImplementation "org.projectlombok:lombok:${Lombok}"
+    testAnnotationProcessor "org.projectlombok:lombok:${Lombok}"
 }
 
 processResources {

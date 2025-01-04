@@ -1,53 +1,59 @@
 package de.butzlabben.world.util;
 
-//import de.butzlabben.world.WorldSystem;
+import de.butzlabben.world.WorldSystem;
 import java.util.logging.Level;
-
+import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
-
-import de.butzlabben.world.WorldSystem;
-
 
 /**
  * @author Butzlabben
  * @since 14.08.2018
  */
 public class VersionUtil {
-
-    private static int version;
-
-    private VersionUtil() {
-    }
+    private static int version = 0;
+    private static final Map<String, Integer> VERSION_MAP = Map.ofEntries(
+        new SimpleEntry<>("1.21", 21),
+        new SimpleEntry<>("1.20", 20),
+        new SimpleEntry<>("1.19", 19),
+        new SimpleEntry<>("1.18", 18),
+        new SimpleEntry<>("1.17", 17),
+        new SimpleEntry<>("1.16", 16),
+        new SimpleEntry<>("1.15", 15),
+        new SimpleEntry<>("1.14", 14),
+        new SimpleEntry<>("1.13", 13),
+        new SimpleEntry<>("1.12", 12),
+        new SimpleEntry<>("1.11", 11),
+        new SimpleEntry<>("1.10", 10),
+        new SimpleEntry<>("1.9", 9),
+        new SimpleEntry<>("1.8", 8),
+        new SimpleEntry<>("1.7", 7),
+        new SimpleEntry<>("1.6", 6),
+        new SimpleEntry<>("1.5", 5),
+        new SimpleEntry<>("1.4", 4),
+        new SimpleEntry<>("1.3", 3)
+    );
 
     public static int getVersion() {
         if (version == 0) {
             // Detect version
-            String v = Bukkit.getVersion();
-            if (v.contains("1.21")) version = 21;
-            else if (v.contains("1.20")) version = 20;
-            else if (v.contains("1.19")) version = 19;
-            else if (v.contains("1.18")) version = 18;
-            else if (v.contains("1.17")) version = 17;
-            else if (v.contains("1.16")) version = 16;
-            else if (v.contains("1.15")) version = 15;
-            else if (v.contains("1.14")) version = 14;
-            else if (v.contains("1.13")) version = 13;
-            else if (v.contains("1.12")) version = 12;
-            else if (v.contains("1.11")) version = 11;
-            else if (v.contains("1.10")) version = 10;
-            else if (v.contains("1.9")) version = 9;
-            else if (v.contains("1.8")) version = 8;
-            else if (v.contains("1.7")) version = 7;
-            else if (v.contains("1.6")) version = 6;
-            else if (v.contains("1.5")) version = 5;
-            else if (v.contains("1.4")) version = 4;
-            else if (v.contains("1.3")) version = 3;
-        }
-        if (version == 0) {
-            WorldSystem.logger().log(Level.SEVERE,"[WorldSystem] Unknown version: " + Bukkit.getVersion());
-            WorldSystem.logger().log(Level.SEVERE,"[WorldSystem] Choosing version 1.12.2");
-            version = 12;
+            String detectedVersion = Bukkit.getVersion();
+
+            // Iterate over the map to find a match
+            for (Map.Entry<String, Integer> entry : VERSION_MAP.entrySet()) {
+                if (detectedVersion.contains(entry.getKey())) {
+                    version = entry.getValue();
+                    break;
+                }
+            }
+
+            // Handle unknown version
+            if (version == 0) {
+                WorldSystem.logger().log(Level.SEVERE, "[WorldSystem] Unknown version: " + detectedVersion);
+                WorldSystem.logger().log(Level.SEVERE, "[WorldSystem] Defaulting to version 1.12.2");
+                version = 12;
+            }
         }
         return version;
     }

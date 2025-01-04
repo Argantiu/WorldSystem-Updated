@@ -14,7 +14,8 @@ public class WorldCheckerRunnable implements Runnable {
     @Override
     public void run() {
         for (World world : Bukkit.getWorlds()) {
-            if (SystemWorld.getSystemWorld(world.getName()) == null || !SystemWorld.getSystemWorld(world.getName()).isLoaded())
+            if (SystemWorld.getSystemWorld(world.getName()) == null
+                    || !SystemWorld.getSystemWorld(world.getName()).isLoaded())
                 continue;
             int other = world.getEntities().size() - world.getPlayers().size();
             if (other > PluginConfig.getEntitysPerWorld()) {

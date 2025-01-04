@@ -25,7 +25,6 @@ public class PlayerPositions {
 
     private final DatabaseUtil util = DatabaseProvider.instance.util;
 
-
     private PlayerPositions() {
         checkTables();
     }
@@ -45,7 +44,8 @@ public class PlayerPositions {
         String tableName = PluginConfig.getWorldsTableName();
 
         try {
-            PreparedStatement ps = util.prepareStatement("SELECT * FROM " + tableName + " WHERE player=? AND id=? AND owner=?");
+            PreparedStatement ps = util
+                    .prepareStatement("SELECT * FROM " + tableName + " WHERE player=? AND id=? AND owner=?");
 
             ps.setString(1, uuid.toString());
             ps.setInt(2, id);

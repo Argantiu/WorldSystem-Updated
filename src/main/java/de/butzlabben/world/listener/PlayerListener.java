@@ -23,7 +23,7 @@ public class PlayerListener implements Listener {
 
     private final HashMap<UUID, World> deathLocations = new HashMap<>();
 
-    //#17
+    // #17
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(PlayerJoinEvent e) {
         PlayerWrapper.updateDatabase(e.getPlayer());

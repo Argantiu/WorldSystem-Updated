@@ -18,7 +18,6 @@ import java.util.UUID;
 
 public class PlayerWrapper {
 
-
     private static final DatabaseUtil util = DatabaseProvider.instance.util;
 
     static {
@@ -86,33 +85,33 @@ public class PlayerWrapper {
             // Return the OfflinePlayer using the online player's UUID
             return Bukkit.getOfflinePlayer(player.getUniqueId());
         }
-    
+
         // If the player is not online, attempt to get the UUID from the database
         UUID uuid = PlayerWrapper.getUUID(name);
         if (uuid != null) {
             return Bukkit.getOfflinePlayer(uuid);
         }
-    
+
         // If the UUID is not in the database, return null or handle accordingly
         return null;
     }
 
     /*
-    public static OfflinePlayer getOfflinePlayer(String name) {
-        Player player = Bukkit.getPlayer(name);
-        if(player != null)
-            return Bukkit.getOfflinePlayer(player.getUniqueId());
-
-        UUID uuid = PlayerWrapper.getUUID(name);
-        if(uuid != null)
-            return Bukkit.getOfflinePlayer(uuid);
-
-        return Bukkit.getOfflinePlayer(name);
-    }*/
+     * public static OfflinePlayer getOfflinePlayer(String name) {
+     * Player player = Bukkit.getPlayer(name);
+     * if(player != null)
+     * return Bukkit.getOfflinePlayer(player.getUniqueId());
+     * 
+     * UUID uuid = PlayerWrapper.getUUID(name);
+     * if(uuid != null)
+     * return Bukkit.getOfflinePlayer(uuid);
+     * 
+     * return Bukkit.getOfflinePlayer(name);
+     * }
+     */
 
     public static OfflinePlayer getOfflinePlayer(UUID uuid) {
         return Bukkit.getOfflinePlayer(uuid);
     }
-
 
 }

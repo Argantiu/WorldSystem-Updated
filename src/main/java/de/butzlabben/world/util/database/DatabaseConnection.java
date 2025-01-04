@@ -20,12 +20,12 @@ public abstract class DatabaseConnection implements DatabaseUtil {
         synchronized (lock) {
             try {
                 if (connection == null || connection.isClosed()) {
-                    WorldSystem.logger().log(Level.SEVERE,"[WorldSystem | DB] Connection does not exist or was already closed");
+                    WorldSystem.logger().log(Level.SEVERE, "[WorldSystem | DB] Connection does not exist or was already closed");
                     return;
                 }
                 connection.close();
             } catch (SQLException e) {
-                WorldSystem.logger().log(Level.WARNING,"[WorldSystem | DB] Connection could not be closed");
+                WorldSystem.logger().log(Level.WARNING, "[WorldSystem | DB] Connection could not be closed");
                 e.printStackTrace();
             }
         }
