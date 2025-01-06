@@ -19,7 +19,7 @@ ext { // Dependency versions
     SpigotAPI = "1.21.3-R0.1-SNAPSHOT"
     AuthLib = "1.5.26"
     WorldEdit = "7.3.6-SNAPSHOT"
-    FAWE = "2.12.2"
+    FAWE = "2.12.3"
     VaultAPI = "1.7.1"
     PlaceholderAPI = "2.11.6"
     Lombok = "1.18.34"
