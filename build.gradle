@@ -42,7 +42,7 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.8.0")
-    implementation("com.google.guava:guava:21.0")
+    implementation("com.google.guava:guava:23.0")
     // Adventure API for text formatting
     implementation("net.kyori:adventure-text-minimessage:${Minimessage}")
     
@@ -74,7 +74,7 @@ dependencies {
 configurations.all {
     resolutionStrategy {
         force("com.google.code.gson:gson:2.8.0")
-        force("com.google.guava:guava:21.0")
+        force("com.google.guava:guava:23.0")
     }
 }
 
