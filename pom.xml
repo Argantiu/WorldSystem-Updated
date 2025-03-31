@@ -60,7 +60,7 @@
                 <dependency>
                     <groupId>com.intellectualsites.bom</groupId> <!-- https://github.com/IntellectualSites/bom -->
                     <artifactId>bom-newest</artifactId>
-                    <version>1.50</version>
+                    <version>1.52</version>
                     <scope>import</scope>
                     <type>pom</type>
                 </dependency>
