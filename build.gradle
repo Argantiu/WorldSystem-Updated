@@ -24,7 +24,7 @@ ext { // Dependency versions
     PlaceholderAPI = "2.11.6"
     Lombok = "1.18.38"
     CommonsIO = "2.18.0"
-    Minimessage = "4.19.0"
+    Minimessage = "4.20.0"
     gson = "2.12.1"
     guava = "33.4.6-jre"
     // Test dependencies
