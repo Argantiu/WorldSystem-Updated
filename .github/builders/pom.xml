@@ -17,7 +17,7 @@
             <VaultAPI>1.7.1</VaultAPI>
             <PlaceholderAPI>2.11.6</PlaceholderAPI>
             <Lombok>1.18.34</Lombok>
-            <CommonsIO>2.18.0</CommonsIO>
+            <CommonsIO>2.19.0</CommonsIO>
             <Minimessage>4.19.0</Minimessage>
 
             <!-- Test dependencies -->
