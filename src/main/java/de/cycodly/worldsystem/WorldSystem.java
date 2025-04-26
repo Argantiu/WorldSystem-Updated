@@ -12,6 +12,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.SingleLineChart;
 
 import de.cycodly.worldsystem.commands.CommandRegistry;
 import de.cycodly.worldsystem.config.DependenceConfig;
@@ -54,29 +55,29 @@ public class WorldSystem extends JavaPlugin {
         // Create directories
         File sources = new File(folder + "/worldsources");
         File languages = new File(folder + "/languages");
-
+    
         if (!sources.exists()) {
             sources.mkdirs();
         }
         if (!languages.exists()) {
             languages.mkdirs();
-        }
-
+        } 
         // Create files
         File guiYML = new File(folder, "gui.yml");
         File configYML = new File(folder, "config.yml");
         File dependenceYML = new File(folder, "dependence.yml");
-        String[] langYML = { "en", "de", "hu", "nl", "pl", "es", "ru", "fi", "ja", "zh", "fr", PluginConfig.getLanguage() };
 
+        //Important: initialize config builders first before usage (or "FILE" will be null)
         PluginConfig.checkConfig(configYML);
         GuiConfig.checkConfig(guiYML);
         SettingsConfig.checkConfig();
         YamlConfiguration confg = YamlConfiguration.loadConfiguration(configYML);
 
+        String[] langYML = { "en", "de", "hu", "nl", "pl", "es", "ru", "fi", "ja", "zh", "fr", PluginConfig.getLanguage() };
         for (String lang : langYML) {
             MessageConfig.checkConfig(new File(languages, lang + ".yml"));
         }
-
+    
         if (!dependenceYML.exists()) {
             try {
                 dependenceYML.createNewFile();
@@ -149,7 +150,7 @@ public class WorldSystem extends JavaPlugin {
 
         // System.setProperty("bstats.relocatecheck", "false");
         Metrics metrics = new Metrics(this, BSTATS_ID);
-        // metrics.addCustomChart(new SingleLineChart("worlds", DependenceConfig::getHighestID));
+        metrics.addCustomChart(new SingleLineChart("worlds", DependenceConfig::getHighestID));
 
         if (Bukkit.getPluginManager().getPlugin("Chunky") != null && PluginConfig.loadWorldsASync()) {
 

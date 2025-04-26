@@ -27,7 +27,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PluginConfig {
 
-    private final static GameMode[] GAME_MODES = new GameMode[]{GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR};
+    private final static GameMode[] GAME_MODES = new GameMode[] {GameMode.SURVIVAL, GameMode.CREATIVE, GameMode.ADVENTURE, GameMode.SPECTATOR};
     private static File FILE;
 
     private PluginConfig() {}
@@ -37,8 +37,8 @@ public class PluginConfig {
         if (FILE.exists()) {
             YamlConfiguration cfg = getConfig();
             if (!(cfg.isString("worldfolder") && cfg.isInt("unloadingtime")
-                    && cfg.isBoolean("survival") && cfg.isString("language") && cfg.isString("prefix")
-                    && cfg.isInt("request_expires") && cfg.isBoolean("need_confirm")
+                    && cfg.isBoolean("survival") && cfg.isString("language") && cfg.isString("prefix") && cfg.isString("cmd_prefix")
+                    && cfg.isInt("request_expires")
                     && cfg.isBoolean("contact_authserver") && cfg.isBoolean("spawn_teleportation")
                     && cfg.isInt("delete_after") && cfg.isBoolean("worldtemplates.multi_choose")
                     && cfg.isString("worldtemplates.default") && cfg.isBoolean("load_worlds_async") &&
@@ -73,7 +73,7 @@ public class PluginConfig {
                                     + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".yml").toPath(),
                             StandardCopyOption.REPLACE_EXISTING);
                     Files.delete(FILE.toPath());
-                    WorldSystem.logger().log(Level.SEVERE,"[WorldSystem] Config is broken, creating a new one!");
+                    WorldSystem.logger().log(Level.SEVERE,"Config is broken, creating a new one!");
                     checkConfig(f);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -87,18 +87,17 @@ public class PluginConfig {
                 }
                 // Try to get the config from resources
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("config.yml");
-                if (in != null) {
-                    // Copy from resources
-                    Files.copy(in, FILE.toPath());
-                    in.close();
-                } else {
+                // Copy from resources
+                Files.copy(in, FILE.toPath());
+                in.close();
+                if (in == null) {
                     // Create a new config with default values if resource not found
                     YamlConfiguration config = new YamlConfiguration();
                     config.set("prefix", "&8[&3WorldSystem&8] &6");
-                    config.set("command_prefix", "realms");
+                    config.set("cmd_prefix", "ws");
                     config.set("worldfolder", "plugins/WorldSystem/Worlds");
                     config.set("language", "en");
-                    config.set("need_confirm", true);
+                    //config.set("need_confirm", true);
                     config.set("contact_authserver", true);
                     config.set("spawn.gamemode", 2);
                     config.set("spawn.spawnpoint.use_last_location", false);
@@ -146,14 +145,13 @@ public class PluginConfig {
 
         // Should fix #2
         if (getSpawn(null).getWorld() == null) {
-            Bukkit.getConsoleSender().sendMessage(getPrefix() + "§cA lobby/hub spawn is missing. If this is not the first launch, add a spawn in config.yml");
+            WorldSystem.logger().log(Level.SEVERE,"A lobby/hub spawn is missing. If this is not the first launch, add a spawn in config.yml");
         }
     }
 
     public static YamlConfiguration getConfig() {
         try {
-            return YamlConfiguration
-                    .loadConfiguration(new InputStreamReader(new FileInputStream(FILE), StandardCharsets.UTF_8));
+            return YamlConfiguration.loadConfiguration(new InputStreamReader(new FileInputStream(FILE), StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

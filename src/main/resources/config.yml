@@ -7,7 +7,6 @@
 # Prefix which will be shown before each message
 prefix: '&8[&3WorldSystem&8] &6'
 
-
 # Command prefix for WorldSystem
 cmd_prefix: 'ws'
 
@@ -91,8 +90,26 @@ database:
     file: 'plugins/WorldSystem/repository.db'
 
 ##################
-# World templates #
+# World settings #
 ##################
+
+# If true nobody can teleport or change their gamemode a WorldSystem world
+# Except for players with the permissions: ws.gamemode | ws.tp.*
+survival: false
+
+# If true players will teleported to the spawn on join
+spawn_teleportation: true
+
+# Location where you spawn when you join a world
+worldspawn:
+  use_last_location: true
+  use: false
+  spawnpoint:
+    x: 0
+    y: 20
+    z: 0
+    yaw: 0
+    pitch: 0
 
 worldtemplates:
   # Whether players can decide on different templates
@@ -130,86 +147,3 @@ worldtemplates:
         # Put in here the name of a generator
         # If you have one from one plugin
         plugin: ''
-
-##################
-# World settings #
-##################
-
-# If true nobody can teleport or change their gamemode a WorldSystem world
-# Except for players with the permissions: ws.gamemode | ws.tp.*
-survival: false
-
-# Set the difficulty of the worlds
-difficulty: EASY
-
-# If true players will teleported to the spawn on join
-spawn_teleportation: true
-
-# Location where you spawn when you join a world
-worldspawn:
-  use_last_location: false
-  use: false
-  spawnpoint:
-    x: 0
-    y: 60
-    z: 0
-    yaw: 0
-    pitch: 0
-
-# Center will be at the spawn or the worldspawn
-worldborder:
-  # If WorldSystem should change the worldborder
-  should_change: true
-  # Default size
-  normal: 500
-  # Here you can define your own ranks, as many as you want
-  # The permission node will be the key and the value the size
-  ranks:
-    # For example, with the permission ws.big you will get a worldborder with the size 1000
-    ws.big: 1000
-    ws.bigger: 1500
-
-  # Set a specialized center which is not the spawn
-  center:
-    as_spawn: true
-    # Should the worldborder move with the home set by the owner
-    as_home: false
-    x: 0
-    y: 60
-    z: 0
-
-# Commands that should be executed on /ws get when it is ready
-# Placeholders: %player: Name of player, %world: Name of world, %uuid: UUID of player
-executed_cmds:
-#- tell %player You have got a world
-#- tell %player You are now on %world
-
-# If you need help, look at
-# https://minecraft.wiki/w/Game_rule
-
-# Only all gamerules from 1.12.2 are supported!
-
-announceAdvancements: true
-commandBlockOutput: false
-disableElytraMovementCheck: false
-doDaylightCycle: true
-doEntityDrops: true
-doFireTick: true
-doLimitedCrafting: false
-doMobLoot: true
-doMobSpawning: true
-doTileDrops: true
-doWeatherCycle: false
-gameLoopFunction: false
-keepInventory: true
-logAdminCommands: true
-maxCommandChainLength: 65536
-maxEntityCramming: 24
-mobGriefing: true
-naturalRegeneration: true
-randomTickSpeed: 3
-reducedDebugInfo: false
-sendCommandFeedback: true
-showDeathMessages: true
-spawnRadius: 10
-spectatorsGenerateChunks: true

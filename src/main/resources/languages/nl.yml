@@ -57,9 +57,9 @@ toggle:
     disabled: "&cJij hebt TNT-schade gedeactiveerd!"
 
 info:
-  owner: "Owner: %data"
-  id: "ID: %data"
-  member: "Toegevoegd: %data"
+  owner: "Owner:&a %data"
+  id: "ID:&a %data"
+  member: "Toegevoegd:&a %data"
   tnt: "TNT: %data"
   fire: "Vuur: %data"
   enabled: "&Aan"

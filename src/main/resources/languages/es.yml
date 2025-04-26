@@ -60,9 +60,9 @@ toggle:
     disabled: "&cHas desactivado la TNT."
 
 info:
-  owner: "Propietario: %data"
-  id: "ID: %data"
-  member: "Miembros: %data"
+  owner: "Propietario:&a %data"
+  id: "ID:&a %data"
+  member: "Miembros:&a %data"
   tnt: "TNT: %data"
   fire: "Fuego: %data"
   enabled: "&aActivado"

@@ -60,9 +60,9 @@ toggle:
     disabled: "&cTNT-Schaden deaktiviert!"
 
 info:
-  owner: "Eigent\u00fcmer: %data"
-  id: "ID: %data"
-  member: "Mitglieder: %data"
+  owner: "Eigent\u00fcmer:&a %data"
+  id: "ID:&a %data"
+  member: "Mitglieder:&a %data"
   tnt: "TNT: %data"
   fire: "Feuer: %data"
   enabled: "&aAn"

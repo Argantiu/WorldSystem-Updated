@@ -42,7 +42,7 @@ public class VersionUtil {
 
             // Iterate over the map to find a match
             for (Map.Entry<String, Integer> entry : VERSION_MAP.entrySet()) {
-                if (detectedVersion.contains(entry.getKey())) {
+                if (detectedVersion.startsWith(entry.getKey())) {
                     version = entry.getValue();
                     break;
                 }
@@ -50,9 +50,11 @@ public class VersionUtil {
 
             // Handle unknown version
             if (version == 0) {
-                WorldSystem.logger().log(Level.SEVERE, "[WorldSystem] Unknown version: " + detectedVersion);
-                WorldSystem.logger().log(Level.SEVERE, "[WorldSystem] Defaulting to version 1.12.2");
+                WorldSystem.logger().log(Level.SEVERE, "Unknown version: " + detectedVersion);
+                WorldSystem.logger().log(Level.SEVERE, "Defaulting to version 1.12.2");
                 version = 12;
+            } else {
+                WorldSystem.logger().log(Level.INFO, "Version "+ version +" detected: " + detectedVersion);
             }
         }
         return version;

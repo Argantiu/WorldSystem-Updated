@@ -1,7 +1,7 @@
 val plugingroup = "de.cycodly"
-val pluginname = "WorldSystemUpdated"
+val pluginname = "WorldSystem"
 val pluginauthors = "[Butzlabben, Trainerlord, Cycodly]"
-val pluginversion = "2.4.40-dev"
+val pluginversion = "2.4.40"
 val plugindescription = "Worldsystem - Let players create thier own worlds"
 val pluginapiversion = "1.16"
 val pluginminecraft = "1.21.4"
@@ -30,6 +30,7 @@ repositories {
     mavenCentral()
     maven("https://jitpack.io")
     maven("https://repo.extendedclip.com/releases/")
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://maven.enginehub.org/repo/")
     maven("https://repo.codemc.io/repository/maven-public/")
 }

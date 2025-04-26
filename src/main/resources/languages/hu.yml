@@ -58,9 +58,9 @@ toggle:
     disabled: "&cDeaktiváltad TNT-sebzést!"
 
 info:
-  owner: "Tulajdonos: %data"
-  id: "ID: %data"
-  member: "Tag: %data"
+  owner: "Tulajdonos:&a %data"
+  id: "ID:&a %data"
+  member: "Tag:&a %data"
   tnt: "TNT: %data"
   fire: "Tűz: %data"
   enabled: "&aBe"

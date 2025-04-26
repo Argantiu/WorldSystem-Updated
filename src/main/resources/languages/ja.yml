@@ -60,9 +60,9 @@ toggle:
     disabled: "&cTNTダメージが無効になりました！"
 
 info:
-  owner: "所有者: %data"
-  id: "ID: %data"
-  member: "メンバー: %data"
+  owner: "所有者:&a %data"
+  id: "ID:&a %data"
+  member: "メンバー:&a %data"
   tnt: "TNT: %data"
   fire: "炎: %data"
   enabled: "&aオン"

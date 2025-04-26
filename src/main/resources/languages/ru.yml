@@ -57,9 +57,9 @@ toggle:
     disabled: "&cПовреждение через ТНТ отключено!"
 
 info:
-  owner: "Владелец: %data"
-  id: "ID: %data"
-  member: "Члены: %data"
+  owner: "Владелец:&a %data"
+  id: "ID:&a %data"
+  member: "Члены:&a %data"
   tnt: "ТНТ: %data"
   fire: "Огонь: %data"
   enabled: "&aВключен"

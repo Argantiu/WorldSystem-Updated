@@ -57,9 +57,9 @@ toggle:
     disabled: "&cWyłączyłeś obrażenia od TNT!"
 
 info:
-  owner: "Właściciel: %data"
-  id: "ID: %data"
-  member: "Członek: %data"
+  owner: "Właściciel:&a %data"
+  id: "ID:&a %data"
+  member: "Członek:&a %data"
   tnt: "TNT: %data"
   fire: "Ogień: %data"
   enabled: "&aWłączone"

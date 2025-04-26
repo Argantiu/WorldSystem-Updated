@@ -60,9 +60,9 @@ toggle:
     disabled: "&cYou deactivated TNT-Damage!"
 
 info:
-  owner: "Owner: %data"
-  id: "ID: %data"
-  member: "Member: %data"
+  owner: "Owner:&a %data"
+  id: "ID:&a %data"
+  member: "Member:&a %data"
   tnt: "TNT: %data"
   fire: "Fire: %data"
   enabled: "&aOn"

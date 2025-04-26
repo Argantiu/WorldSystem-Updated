@@ -28,8 +28,8 @@ public class WSCommands {
 
         String prefix = PluginConfig.getPrefix();
         cs.sendMessage(
-                prefix + "WorldSystem by CrazyCloudCraft v" + WorldSystem.getInstance().getDescription().getVersion());
-        cs.sendMessage(prefix + "Contributors: Jubeki, montlikadani, jstoeckm2, Butzlabben");
+                prefix + "WorldSystemUpdated v" + WorldSystem.getInstance().getDescription().getVersion());
+        cs.sendMessage(prefix + "Authors: Cycodly, Trainerlord, Butzlabben");
         List<String> cmdHelp = MessageConfig.getCommandHelp();
         cmdHelp.forEach(s -> cs.sendMessage("§6" + s)); //(prefix + s));
         // cs.sendMessage(prefix + "==============");

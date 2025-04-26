@@ -57,9 +57,9 @@ toggle:
     disabled: "&cSinä deaktivoit TNT-Damagen!"
 
 info:
-  owner: "Omistaja: %data"
-  id: "ID: %data"
-  member: "Jäsen: %data"
+  owner: "Omistaja:&a %data"
+  id: "ID:&a %data"
+  member: "Jäsen:&a %data"
   tnt: "TNT: %data"
   fire: "Tuli: %data"
   enabled: "&aOn"

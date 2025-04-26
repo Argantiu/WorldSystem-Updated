@@ -28,28 +28,27 @@ public class AsyncCreatorAdapter implements ICreatorAdapter {
         if (Bukkit.getWorld(worldName) == null && chunky.version() == 0) {
             // Start Chunky world generation task asynchronously
             Bukkit.getWorlds().add(creator.createWorld());
-            WorldSystem.logger().log(Level.SEVERE,"World " + worldName + " starting Chunky generation...");
-            chunky.startTask(worldName, "square", 0, 0, 500, 500, "concentric");
+            WorldSystem.logger().log(Level.INFO,"World " + worldName + " starting Chunky generation...");
+            chunky.startTask(worldName, "square", 0, 0, 100, 100, "concentric");
 
-            // Set up callback for when the generation is complete
-            //chunky.onGenerationComplete(this::onWSGenComplete);
-            chunky.onGenerationComplete(event -> generationComplete = true);
-
-            if (generationComplete) {
-                WorldSystem.logger().log(Level.SEVERE,"World generation completed for " + worldName);
+            // Set up callback when the generation is complete
+            chunky.onGenerationComplete(event -> {
+                // Once generation is complete, set the block and call the runnable
+                WorldSystem.logger().log(Level.INFO, "World generation completed for " + worldName);
                 Block block = Bukkit.getWorld(worldName).getBlockAt(0, -64, 0);
                 block.setType(Material.BEDROCK);
-
-                //world.createWorld();
 
                 if (sw != null) {
                     sw.setCreating(false);
                 }
-                r.run();
-            }
+
+                // Execute the Runnable after generation is complete
+                Bukkit.getScheduler().runTask(worldSystem, r);
+            });
         } else {
-            WorldSystem.logger().log(Level.SEVERE,"World " + worldName + " already exists, no generation.");
-            r.run();
+            WorldSystem.logger().log(Level.SEVERE, "World " + worldName + " already exists, no generation.");
+            // If the world already exists, execute the Runnable immediately
+            Bukkit.getScheduler().runTask(worldSystem, r);
         }
     }
 }

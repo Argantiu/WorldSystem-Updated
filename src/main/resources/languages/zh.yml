@@ -56,9 +56,9 @@ toggle:
     disabled: "&c你禁用了 TNT-爆炸!"
 
 info:
-  owner: "管理者: %data"
-  id: "ID: %data"
-  member: "成员: %data"
+  owner: "管理者:&a %data"
+  id: "ID:&a %data"
+  member: "成员:&a %data"
   tnt: "TNT: %data"
   fire: "火: %data"
   enabled: "&a开启"

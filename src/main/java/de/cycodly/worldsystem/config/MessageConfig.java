@@ -22,7 +22,7 @@ import net.md_5.bungee.api.ChatColor;
 public class MessageConfig {
 
     private static final List<String> defaultCmdHelp = new ArrayList<>(20);
-    private static File file;
+    private static File FILE;
 
     static {
         defaultCmdHelp.add("/ws get §8- §7Will give you a World");
@@ -43,24 +43,24 @@ public class MessageConfig {
     private MessageConfig() {}
 
     public static void checkConfig(File f) {
-        file = f;
-        if (!file.exists()) {
+        FILE = f;
+        if (!FILE.exists()) {
             try {
                 // Create parent directories if they don't exist
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdirs();
+                if (!FILE.getParentFile().exists()) {
+                    FILE.getParentFile().mkdirs();
                 }
                 // Try to get the language file from resources
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("languages/" + f.getName());
 
                 if (in != null) {
-                    Files.copy(in, file.toPath());
+                    Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
                     // If specific language file not found, try to use custom_messages template
                     in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom_messages.yml");
                     if (in != null) {
-                        Files.copy(in, file.toPath());
+                        Files.copy(in, FILE.toPath());
                         in.close();
                     } else {
                         // Create default messages if no resource found
@@ -98,7 +98,7 @@ public class MessageConfig {
                         config.set("request.confirm", "&cPlease confirm reset of your world: %command");
 
                         // Save the config
-                        config.save(file);
+                        config.save(FILE);
                     }
                 }
             } catch (IOException e) {
@@ -109,7 +109,7 @@ public class MessageConfig {
 
     private static YamlConfiguration getConfig() {
         try {
-            return YamlConfiguration.loadConfiguration(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+            return YamlConfiguration.loadConfiguration(new InputStreamReader(new FileInputStream(FILE), StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

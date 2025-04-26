@@ -29,8 +29,7 @@ import de.cycodly.worldsystem.wrapper.SystemWorld;
 public class SettingsConfig {
 
     private static final HashMap<String, Long> BORDER_SIZES = new HashMap<>();
-
-    private static File file;
+    private static File FILE;
 
     private SettingsConfig() {
     }
@@ -169,7 +168,7 @@ public class SettingsConfig {
     private static YamlConfiguration getConfig() {
         try {
             return YamlConfiguration
-                    .loadConfiguration(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+                    .loadConfiguration(new InputStreamReader(new FileInputStream(FILE), StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -177,19 +176,19 @@ public class SettingsConfig {
     }
 
     public static void checkConfig() {
-        File file = new File(WorldSystem.getInstance().getDataFolder(), "settings.yml");
-        SettingsConfig.file = file;
-        if (!file.exists()) {
+        File FILE = new File(WorldSystem.getInstance().getDataFolder(), "settings.yml");
+        SettingsConfig.FILE = FILE;
+        if (!FILE.exists()) {
             try {
                 // Create parent directories if they don't exist
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdirs();
+                if (!FILE.getParentFile().exists()) {
+                    FILE.getParentFile().mkdirs();
                 }
 
                 // Try to get the config from resources
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("settings.yml");
                 if (in != null) {
-                    Files.copy(in, file.toPath());
+                    Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
                     // Create default settings if resource not found
@@ -237,7 +236,7 @@ public class SettingsConfig {
                     // Commands to execute when getting a world
                     config.set("commands_on_get", new ArrayList<String>());
 
-                    config.save(file);
+                    config.save(FILE);
                 }
             } catch (IOException e) {
                 WorldSystem.logger().log(Level.SEVERE, "Wasn't able to create settings.yml", e);

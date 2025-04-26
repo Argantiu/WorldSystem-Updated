@@ -24,27 +24,26 @@ import de.cycodly.worldsystem.WorldSystem;
 
 public class GuiConfig {
 
-    private static File file;
+    private static File FILE;
 
     private GuiConfig() {
     }
 
     public static void checkConfig(File f) {
-        file = f;
-        if (!file.exists()) {
+        FILE = f;
+        if (!FILE.exists()) {
             try {
                 // Create parent directories if they don't exist
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdirs();
+                if (!FILE.getParentFile().exists()) {
+                    FILE.getParentFile().mkdirs();
                 }
                 // Try to get the config from resources
                 InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("gui.yml");
                 if (in != null) {
-                    Files.copy(in, file.toPath());
+                    Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
-                    WorldSystem.logger().log(Level.WARNING,
-                            "Could not find gui.yml in resources, creating default config");
+                    WorldSystem.logger().log(Level.WARNING, "Could not find gui.yml in resources, creating default config");
                     // Create default GUI config
                     YamlConfiguration config = new YamlConfiguration();
                     config.set("options.enabled.material", "LIME_DYE");
@@ -58,7 +57,7 @@ public class GuiConfig {
                     config.set("options.fill.material", "BLACK_STAINED_GLASS_PANE");
                     config.set("options.fill.display", " ");
                     config.set("options.players.playerhead.material", "PLAYER_HEAD");
-                    config.save(file);
+                    config.save(FILE);
                 }
 
             } catch (IOException e) {
@@ -80,7 +79,7 @@ public class GuiConfig {
     public static YamlConfiguration getConfig() {
         try {
             return YamlConfiguration
-                    .loadConfiguration(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+                    .loadConfiguration(new InputStreamReader(new FileInputStream(FILE), StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
