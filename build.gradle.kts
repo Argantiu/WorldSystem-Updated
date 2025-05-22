@@ -1,33 +1,22 @@
-val plugingroup = "de.cycodly"
-val pluginname = "WorldSystem"
-val pluginauthors = "[Butzlabben, Trainerlord, Cycodly]"
-val pluginversion = "2.4.40"
-val plugindescription = "Worldsystem - Let players create thier own worlds"
-val pluginapiversion = "1.16"
-val pluginminecraft = "1.21.4"
-val plugindepend = "[WorldEdit]"
-val pluginsoftdepend = "[PlaceholderAPI, Vault, Chunky]"
-
 plugins {
     id("com.gradleup.shadow") version "8.3.6"
     id("io.freefair.lombok") version "8.13.1"
     id("java")
     id("jacoco")
     id("base")
-}
-
-base {
-    archivesName = pluginname
-}
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
+    `java-library`
+    `maven-publish`
+    id("io.github.0ffz.github-packages") version "1.2.1"
+    id("io.papermc.hangar-publish-plugin") version "0.1.2"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.13"
 }
 
 repositories {
+    gradlePluginPortal()
+    mavenLocal()
     mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.xenondevs.xyz/releases")
     maven("https://jitpack.io")
     maven("https://repo.extendedclip.com/releases/")
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
@@ -36,12 +25,15 @@ repositories {
 }
 
 dependencies {
+    annotationProcessor("org.jetbrains:annotations-java5:24.1.0")
+    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
+    compileOnly("it.unimi.dsi:fastutil:8.5.11")
+    implementation("xyz.xenondevs.invui:invui:1.45")
     annotationProcessor(libs.lombok)
     implementation(libs.commonsio)
     implementation(libs.minimessage)
     implementation(libs.bstatsBukkit) { isTransitive = false }
     implementation(libs.bstatsBase) { isTransitive = false }
-    compileOnly(libs.spigotapi)
     compileOnly(libs.lombok)
     compileOnly(libs.placeholderapi)
     compileOnly(libs.vaultapi)
@@ -63,75 +55,23 @@ configurations.all {
     }
 }
 
-tasks.processResources {
-    filesMatching("plugin.yml") {
-        expand(
-            "pluginname" to pluginname,
-            "group" to plugingroup,
-            "version" to pluginversion,
-            "authors" to pluginauthors,
-            "description" to plugindescription,
-            "apiversion" to pluginapiversion,
-            "depend" to plugindepend,
-            "softdepend" to pluginsoftdepend
-        )
-    }
-    from(sourceSets.main.get().resources.srcDirs) {
-        include("plugin.yml")
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    }
-}
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 
-tasks.shadowJar {
-    minimize()
-    archiveClassifier.set("")
-    archiveFileName.set("$pluginname-$pluginversion.jar")
-    dependencies {
-        exclude(dependency("commons-io:commons-io"))
-        exclude(dependency("net.kyori:adventure-text-minimessage"))
-        relocate("org.bstats", "de.cycodly.worldsystem.bstats") {
-            include(dependency("org.bstats:"))
-        }
-    }
-    
-}
+group = "de.dertoaster"
+version = "3.0.0-TTE"
+description = "WorldSystem-TTE"
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-tasks.withType<Javadoc> {
-    source = sourceSets.main.get().allJava
-    destinationDir = file("build/javadocs")
-    include("**/api/*")
-    options {
-        (this as? StandardJavadocDocletOptions)?.apply {
-            links(
-                "https://javadoc.io/static/org.jetbrains/annotations/20.1.0/",
-                "https://docs.oracle.com/javase/21/docs/api/",
-                "https://papermc.io/javadocs/paper/$pluginminecraft/"
-            )
-        }
-    }
-}
-
-tasks.withType<JavaCompile> {
-    options.isDeprecation = false
-    options.encoding = "UTF-8"
-    options.compilerArgs.add("-parameters")
-    options.isFork = true
-}
-
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
-    ignoreFailures = false
-}
 
 tasks.jar {
-    archiveFileName.set("$pluginname-$pluginversion-noShade.jar")  
+    archiveBaseName.set("WorldSystem-TTE")
+    archiveClassifier.set("")
+    archiveVersion.set("")
 }
 
-tasks.build {
-    dependsOn(tasks.shadowJar)
+tasks.processResources {
+    from(rootProject.file("LICENSE.md"))
+    filesMatching("*.yml") {
+        expand(mapOf("projectVersion" to project.version))
+    }
 }
-
-project.defaultTasks("build")

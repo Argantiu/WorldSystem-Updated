@@ -1,7 +1,7 @@
 [versions]
-spigotapi = "1.21.4-R0.1-SNAPSHOT"
+paperapi = "1.21.4-R0.1-SNAPSHOT"
 authlib = "1.5.26"
-worldedit = "7.3.12"
+worldedit = "7.3.11"
 fawe = "2.13.0"
 chunky = "1.4.36"
 vaultapi = "1.7.1"
@@ -12,12 +12,13 @@ minimessage = "4.21.0"
 gson = "2.11.0"
 guava = "31.1-jre"
 jupiter = "5.12.2"
-mockito = "5.18.0"
+mockito = "5.17.0"
 assertj = "3.27.3"
 bstats = "3.1.0"
+invui = "1.45"
 
 [libraries]
-spigotapi = { module = "org.spigotmc:spigot-api", version.ref = "spigotapi" }
+paperapi = { module = "org.spigotmc:spigot-api", version.ref = "paperapi" }
 authlib = { module = "com.mojang:authlib", version.ref = "authlib" }
 worldedit = { module = "com.sk89q.worldedit:worldedit-bukkit", version.ref = "worldedit" }
 fawe = { module = "com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit", version.ref = "fawe" }
@@ -34,3 +35,4 @@ mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 bstatsBase = { group = "org.bstats", name = "bstats-base", version.ref = "bstats" }
 bstatsBukkit = { group = "org.bstats", name = "bstats-bukkit", version.ref = "bstats" }
+invui = { group = "xyz.xenondevs.invui", name = "invui", version.ref = "invui"}
