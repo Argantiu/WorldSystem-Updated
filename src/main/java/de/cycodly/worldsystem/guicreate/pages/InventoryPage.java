@@ -6,7 +6,7 @@ import de.cycodly.worldsystem.config.GuiConfig;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import java.util.logging.Level;
 
 /**
@@ -51,7 +51,7 @@ public class InventoryPage extends OrcInventory {
 
     public void addItem(OrcItem item) {
         if (i > 36) {
-            WorldSystem.logger().log(Level.SEVERE,"More items than allowed in page view");
+            WorldSystemPlugin.logger().log(Level.SEVERE,"More items than allowed in page view");
             return;
         }
         addItem(i, item);

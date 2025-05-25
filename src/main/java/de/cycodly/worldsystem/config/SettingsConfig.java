@@ -22,7 +22,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.wrapper.SystemWorld;
 
 //maybe just merge this config with the WorldConfig
@@ -176,7 +176,7 @@ public class SettingsConfig {
     }
 
     public static void checkConfig() {
-        File FILE = new File(WorldSystem.getInstance().getDataFolder(), "settings.yml");
+        File FILE = new File(WorldSystemPlugin.getInstance().getDataFolder(), "settings.yml");
         SettingsConfig.FILE = FILE;
         if (!FILE.exists()) {
             try {
@@ -186,13 +186,13 @@ public class SettingsConfig {
                 }
 
                 // Try to get the config from resources
-                InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("settings.yml");
+                InputStream in = JavaPlugin.getPlugin(WorldSystemPlugin.class).getResource("settings.yml");
                 if (in != null) {
                     Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
                     // Create default settings if resource not found
-                    WorldSystem.logger().log(Level.WARNING,
+                    WorldSystemPlugin.logger().log(Level.WARNING,
                             "Could not find settings.yml in resources, creating default settings");
                     YamlConfiguration config = new YamlConfiguration();
 
@@ -239,7 +239,7 @@ public class SettingsConfig {
                     config.save(FILE);
                 }
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Wasn't able to create settings.yml", e);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Wasn't able to create settings.yml", e);
                 return;
             }
         }

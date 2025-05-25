@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import net.md_5.bungee.api.ChatColor;
 
 public class MessageConfig {
@@ -51,20 +51,20 @@ public class MessageConfig {
                     FILE.getParentFile().mkdirs();
                 }
                 // Try to get the language file from resources
-                InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("languages/" + f.getName());
+                InputStream in = JavaPlugin.getPlugin(WorldSystemPlugin.class).getResource("languages/" + f.getName());
 
                 if (in != null) {
                     Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
                     // If specific language file not found, try to use custom_messages template
-                    in = JavaPlugin.getPlugin(WorldSystem.class).getResource("custom_messages.yml");
+                    in = JavaPlugin.getPlugin(WorldSystemPlugin.class).getResource("custom_messages.yml");
                     if (in != null) {
                         Files.copy(in, FILE.toPath());
                         in.close();
                     } else {
                         // Create default messages if no resource found
-                        WorldSystem.logger().log(Level.WARNING, "Could not find message file in resources, creating default messages");
+                        WorldSystemPlugin.logger().log(Level.WARNING, "Could not find message file in resources, creating default messages");
                         YamlConfiguration config = new YamlConfiguration();
 
                         // Add default messages
@@ -102,7 +102,7 @@ public class MessageConfig {
                     }
                 }
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Wasn't able to create Message file", e);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Wasn't able to create Message file", e);
             }
         }
     }

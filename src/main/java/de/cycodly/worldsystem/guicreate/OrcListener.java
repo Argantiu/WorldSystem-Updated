@@ -1,6 +1,6 @@
 package de.cycodly.worldsystem.guicreate;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +22,7 @@ public class OrcListener implements Listener {
     private final HashMap<UUID, OrcInventory> invs = new HashMap<>();
 
     private OrcListener() {
-        Bukkit.getPluginManager().registerEvents(this, WorldSystem.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, WorldSystemPlugin.getInstance());
     }
 
     public static synchronized OrcListener getInstance() {

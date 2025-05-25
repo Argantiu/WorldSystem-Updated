@@ -21,7 +21,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.util.PlayerPositions;
 import net.md_5.bungee.api.ChatColor;
 
@@ -73,7 +73,7 @@ public class PluginConfig {
                                     + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".yml").toPath(),
                             StandardCopyOption.REPLACE_EXISTING);
                     Files.delete(FILE.toPath());
-                    WorldSystem.logger().log(Level.SEVERE,"Config is broken, creating a new one!");
+                    WorldSystemPlugin.logger().log(Level.SEVERE,"Config is broken, creating a new one!");
                     checkConfig(f);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -86,7 +86,7 @@ public class PluginConfig {
                     FILE.getParentFile().mkdirs();
                 }
                 // Try to get the config from resources
-                InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("config.yml");
+                InputStream in = JavaPlugin.getPlugin(WorldSystemPlugin.class).getResource("config.yml");
                 // Copy from resources
                 Files.copy(in, FILE.toPath());
                 in.close();
@@ -139,13 +139,13 @@ public class PluginConfig {
                     config.save(FILE);
                 }
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE,"Wasn't able to create Config", e);
+                WorldSystemPlugin.logger().log(Level.SEVERE,"Wasn't able to create Config", e);
             }
         }
 
         // Should fix #2
         if (getSpawn(null).getWorld() == null) {
-            WorldSystem.logger().log(Level.SEVERE,"A lobby/hub spawn is missing. If this is not the first launch, add a spawn in config.yml");
+            WorldSystemPlugin.logger().log(Level.SEVERE,"A lobby/hub spawn is missing. If this is not the first launch, add a spawn in config.yml");
         }
     }
 

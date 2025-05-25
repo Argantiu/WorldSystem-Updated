@@ -20,7 +20,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.cycodly.worldsystem.guicreate.OrcItem;
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 
 public class GuiConfig {
 
@@ -38,12 +38,12 @@ public class GuiConfig {
                     FILE.getParentFile().mkdirs();
                 }
                 // Try to get the config from resources
-                InputStream in = JavaPlugin.getPlugin(WorldSystem.class).getResource("gui.yml");
+                InputStream in = JavaPlugin.getPlugin(WorldSystemPlugin.class).getResource("gui.yml");
                 if (in != null) {
                     Files.copy(in, FILE.toPath());
                     in.close();
                 } else {
-                    WorldSystem.logger().log(Level.WARNING, "Could not find gui.yml in resources, creating default config");
+                    WorldSystemPlugin.logger().log(Level.WARNING, "Could not find gui.yml in resources, creating default config");
                     // Create default GUI config
                     YamlConfiguration config = new YamlConfiguration();
                     config.set("options.enabled.material", "LIME_DYE");
@@ -61,7 +61,7 @@ public class GuiConfig {
                 }
 
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Wasn't able to create GUI", e);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Wasn't able to create GUI", e);
                 return;
             }
         }
@@ -72,7 +72,7 @@ public class GuiConfig {
             OrcItem.back = getBack();
             OrcItem.fill = getFill();
         } catch (Exception e) {
-            WorldSystem.logger().log(Level.SEVERE, "Failed to initialize GUI items", e);
+            WorldSystemPlugin.logger().log(Level.SEVERE, "Failed to initialize GUI items", e);
         }
     }
 

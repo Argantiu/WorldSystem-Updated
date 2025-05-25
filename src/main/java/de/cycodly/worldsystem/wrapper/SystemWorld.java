@@ -2,7 +2,7 @@
 package de.cycodly.worldsystem.wrapper;
 
 import com.google.common.base.Preconditions;
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.config.*;
 import de.cycodly.worldsystem.events.WorldCreateEvent;
 import de.cycodly.worldsystem.events.WorldLoadEvent;
@@ -69,7 +69,7 @@ public class SystemWorld {
      */
     public static void tryUnloadLater(World w) {
         if (w != null)
-            Bukkit.getScheduler().runTaskLater(WorldSystem.getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLater(WorldSystemPlugin.getInstance(), () -> {
                 if (w.getPlayers().size() == 0) {
                     SystemWorld sw = SystemWorld.getSystemWorld(w.getName());
                     if (sw != null && sw.isLoaded())
@@ -119,7 +119,7 @@ public class SystemWorld {
             try {
                 FileUtils.copyDirectory(exampleworld, newworld);
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Couldn't create world for " + uuid);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Couldn't create world for " + uuid);
                 e.printStackTrace();
             }
         else
@@ -145,7 +145,7 @@ public class SystemWorld {
             } catch (IOException e) {
                 if (p != null && p.isOnline())
                     p.sendMessage(PluginConfig.getPrefix() + "§cError: " + e.getMessage());
-                WorldSystem.logger().log(Level.SEVERE, "Couldn't load world of " + uuid);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Couldn't load world of " + uuid);
                 e.printStackTrace();
                 return false;
             }
@@ -158,7 +158,7 @@ public class SystemWorld {
         new BukkitRunnable() {
             @Override
             public void run() {
-                WorldSystem.getInstance().getAdapter().create(event.getWorldCreator(), sw, () -> {
+                WorldSystemPlugin.getInstance().getAdapter().create(event.getWorldCreator(), sw, () -> {
                     // Fix for #16
                     new BukkitRunnable() {
                         @Override
@@ -171,10 +171,10 @@ public class SystemWorld {
                                         .forEach(s -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), s));
                             }
                         }
-                    }.runTask(WorldSystem.getInstance());
+                    }.runTask(WorldSystemPlugin.getInstance());
                 });
             }
-        }.runTaskLater(WorldSystem.getInstance(), 1);
+        }.runTaskLater(WorldSystemPlugin.getInstance(), 1);
 
         return true;
     }
@@ -187,7 +187,7 @@ public class SystemWorld {
      */
     public void directUnload(World w) {
         if (!Bukkit.isPrimaryThread()) {
-            Bukkit.getScheduler().runTask(WorldSystem.getInstance(), () -> directUnload(w));
+            Bukkit.getScheduler().runTask(WorldSystemPlugin.getInstance(), () -> directUnload(w));
             return;
         }
         Preconditions.checkNotNull(w, "world must not be null");
@@ -228,7 +228,7 @@ public class SystemWorld {
      */
     private void unloadLater(World w) {
         if (!Bukkit.isPrimaryThread()) {
-            Bukkit.getScheduler().runTask(WorldSystem.getInstance(), () -> unloadLater(w));
+            Bukkit.getScheduler().runTask(WorldSystemPlugin.getInstance(), () -> unloadLater(w));
             return;
         }
 
@@ -256,7 +256,7 @@ public class SystemWorld {
             a.setGameMode(PluginConfig.getSpawnGamemode());
         }
 
-        unloadLaterTask = Bukkit.getScheduler().runTaskLater(WorldSystem.getInstance(), () -> {
+        unloadLaterTask = Bukkit.getScheduler().runTaskLater(WorldSystemPlugin.getInstance(), () -> {
             // Still in world unloading process?
             if (unloading && w.getPlayers().size() == 0) {
                 if (Bukkit.unloadWorld(w, true)) {
@@ -283,7 +283,7 @@ public class SystemWorld {
      */
     public void load(Player p) {
         if (!Bukkit.isPrimaryThread()) {
-            Bukkit.getScheduler().runTask(WorldSystem.getInstance(), () -> load(p));
+            Bukkit.getScheduler().runTask(WorldSystemPlugin.getInstance(), () -> load(p));
             return;
         }
         Preconditions.checkNotNull(p, "player must not be null");
@@ -311,7 +311,7 @@ public class SystemWorld {
             // Check for duplicated worlds
             File propablyExistingWorld = new File(Bukkit.getWorldContainer(), worldname);
             if (propablyExistingWorld.exists()) {
-                WorldSystem.logger().log(Level.SEVERE, "World " + worldname + " existed twice!");
+                WorldSystemPlugin.logger().log(Level.SEVERE, "World " + worldname + " existed twice!");
                 try {
                     FileUtils.deleteDirectory(propablyExistingWorld);
                 } catch (IOException e) {
@@ -324,7 +324,7 @@ public class SystemWorld {
             try {
                 FileUtils.moveDirectoryToDirectory(world, Bukkit.getWorldContainer(), false);
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Couldn't load world of " + p.getName());
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Couldn't load world of " + p.getName());
                 p.sendMessage(PluginConfig.getPrefix() + "§cError: " + e.getMessage());
                 e.printStackTrace();
             }
@@ -354,7 +354,7 @@ public class SystemWorld {
 
         this.w = w;
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(WorldSystem.getInstance(), new Runnable() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(WorldSystemPlugin.getInstance(), new Runnable() {
             public void run() {
                 teleportToWorldSpawn(p);
             }

@@ -23,7 +23,7 @@ import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 
 import de.cycodly.worldsystem.GameProfileBuilder;
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.util.PlayerWrapper;
 import de.cycodly.worldsystem.wrapper.WorldTemplate;
 
@@ -92,13 +92,13 @@ public class WorldConfig {
     public static void create(UUID uuid, WorldTemplate template) {
         DependenceConfig dc = new DependenceConfig(uuid);
         String worldname = dc.getWorldname();
-        WorldSystem.logger().log(Level.INFO, PluginConfig.getWorlddir() + worldname);
+        WorldSystemPlugin.logger().log(Level.INFO, PluginConfig.getWorlddir() + worldname);
         File file = new File(PluginConfig.getWorlddir() + worldname + "/worldconfig.yml");
         try {
             file.createNewFile();
         } catch (IOException e1) {
             e1.printStackTrace();
-            WorldSystem.logger().log(Level.SEVERE, "Error while creating worldconfig for " + uuid.toString());
+            WorldSystemPlugin.logger().log(Level.SEVERE, "Error while creating worldconfig for " + uuid.toString());
         }
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set("Informations.ID", dc.getID());
@@ -112,8 +112,8 @@ public class WorldConfig {
         try {
             cfg.save(file);
         } catch (IOException e) {
-            WorldSystem.logger().log(Level.SEVERE, "Error while saving worldconfig for " + uuid.toString());
-            WorldSystem.logger().log(Level.SEVERE, e.getMessage());
+            WorldSystemPlugin.logger().log(Level.SEVERE, "Error while saving worldconfig for " + uuid.toString());
+            WorldSystemPlugin.logger().log(Level.SEVERE, e.getMessage());
             e.printStackTrace();
         }
     }

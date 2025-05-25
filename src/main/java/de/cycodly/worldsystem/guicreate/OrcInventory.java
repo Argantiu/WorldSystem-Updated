@@ -1,6 +1,6 @@
 package de.cycodly.worldsystem.guicreate;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -93,7 +93,7 @@ public abstract class OrcInventory {
             if (entry.getKey() >= 0 && entry.getKey() < size) {
                 inv.setItem(entry.getKey(), entry.getValue().getItemStack(p));
             } else {
-                WorldSystem.logger().log(Level.SEVERE, "There is a problem with a configured Item!");
+                WorldSystemPlugin.logger().log(Level.SEVERE, "There is a problem with a configured Item!");
             }
         }
 

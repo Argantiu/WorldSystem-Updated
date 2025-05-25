@@ -1,6 +1,6 @@
 package de.cycodly.worldsystem.commands;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.config.DependenceConfig;
 import de.cycodly.worldsystem.config.MessageConfig;
 import de.cycodly.worldsystem.config.PluginConfig;
@@ -28,7 +28,7 @@ public class WSCommands {
 
         String prefix = PluginConfig.getPrefix();
         cs.sendMessage(
-                prefix + "WorldSystemUpdated v" + WorldSystem.getInstance().getDescription().getVersion());
+                prefix + "WorldSystemUpdated v" + WorldSystemPlugin.getInstance().getDescription().getVersion());
         cs.sendMessage(prefix + "Authors: Cycodly, Trainerlord, Butzlabben");
         List<String> cmdHelp = MessageConfig.getCommandHelp();
         cmdHelp.forEach(s -> cs.sendMessage("§6" + s)); //(prefix + s));
@@ -283,7 +283,7 @@ public class WSCommands {
 
 
     private void create(Player p, WorldTemplate template) {
-        Bukkit.getScheduler().runTask(WorldSystem.getInstance(), () -> {
+        Bukkit.getScheduler().runTask(WorldSystemPlugin.getInstance(), () -> {
             if (SystemWorld.create(p, template))
                 p.sendMessage(MessageConfig.getSettingUpWorld());
         });

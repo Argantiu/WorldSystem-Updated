@@ -1,6 +1,6 @@
 package de.cycodly.worldsystem.util;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import java.util.logging.Level;
 import java.util.Map;
 import java.util.AbstractMap.SimpleEntry;
@@ -50,11 +50,11 @@ public class VersionUtil {
 
             // Handle unknown version
             if (version == 0) {
-                WorldSystem.logger().log(Level.SEVERE, "Unknown version: " + detectedVersion);
-                WorldSystem.logger().log(Level.SEVERE, "Defaulting to version 1.12.2");
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Unknown version: " + detectedVersion);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Defaulting to version 1.12.2");
                 version = 12;
             } else {
-                WorldSystem.logger().log(Level.INFO, "Version "+ version +" detected: " + detectedVersion);
+                WorldSystemPlugin.logger().log(Level.INFO, "Version "+ version +" detected: " + detectedVersion);
             }
         }
         return version;

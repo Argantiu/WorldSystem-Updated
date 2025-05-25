@@ -1,7 +1,7 @@
 package de.cycodly.worldsystem.wrapper;
 
 import de.cycodly.worldsystem.config.PluginConfig;
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import org.bukkit.World;
 import org.bukkit.WorldType;
 import org.bukkit.configuration.ConfigurationSection;
@@ -34,7 +34,7 @@ public class WorldTemplateProvider {
 
         // If templates section doesn't exist, create default template
         if (section == null) {
-            WorldSystem.logger().info("No templates section found in config.yml. Creating default template...");
+            WorldSystemPlugin.logger().info("No templates section found in config.yml. Creating default template...");
 
             // Create worldsources directory if it doesn't exist
             File sources = new File("plugins/WorldSystem/worldsources");
@@ -53,12 +53,12 @@ public class WorldTemplateProvider {
             config.set("worldtemplates.templates.1.name", "template_default");
             try {
                 config.save(new File("plugins/WorldSystem/config.yml"));
-                WorldSystem.logger().info("Created default template configuration");
+                WorldSystemPlugin.logger().info("Created default template configuration");
 
                 // Reload the section after creating it
                 section = config.getConfigurationSection("worldtemplates.templates");
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Failed to save default template configuration", e);
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Failed to save default template configuration", e);
                 return;
             }
         }

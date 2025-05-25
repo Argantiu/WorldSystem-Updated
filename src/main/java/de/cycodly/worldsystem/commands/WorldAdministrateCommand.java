@@ -1,6 +1,6 @@
 package de.cycodly.worldsystem.commands;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.config.DependenceConfig;
 import de.cycodly.worldsystem.config.MessageConfig;
 import de.cycodly.worldsystem.config.PluginConfig;
@@ -174,7 +174,7 @@ public class WorldAdministrateCommand {
         // Delete unnecessary positions
         PlayerPositions.instance.deletePositions(config);
 
-        Bukkit.getScheduler().runTaskLater(WorldSystem.getInstance(), () -> {
+        Bukkit.getScheduler().runTaskLater(WorldSystemPlugin.getInstance(), () -> {
             OfflinePlayer op = dc.getOwner();
 
             String uuid = op.getUniqueId().toString();

@@ -13,7 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.config.DependenceConfig;
 import de.cycodly.worldsystem.config.MessageConfig;
 import de.cycodly.worldsystem.config.PluginConfig;
@@ -104,7 +104,7 @@ public class WorldSettingsCommands {
                 p.sendMessage(MessageConfig.getConfirmRequest().replaceAll("%command", "/ws reset confirm"));
                 p.sendMessage(MessageConfig.getTimeUntilExpires().replaceAll("%time", String.valueOf(time)));
                 toConfirm.add(p);
-                Bukkit.getScheduler().runTaskLater(WorldSystem.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(WorldSystemPlugin.getInstance(), () -> {
                     if (toConfirm.contains(p)) {
                         p.sendMessage(MessageConfig.getRequestExpired());
                         toConfirm.remove(p);
@@ -145,9 +145,9 @@ public class WorldSettingsCommands {
                 
                 // Log the result
                 if (config.home != null && config.home.equals(playerLocation)) {
-                    WorldSystem.logger().log(Level.INFO, "Home location registered successfully");
+                    WorldSystemPlugin.logger().log(Level.INFO, "Home location registered successfully");
                 } else {
-                    WorldSystem.logger().log(Level.INFO, "Home location registration failed");
+                    WorldSystemPlugin.logger().log(Level.INFO, "Home location registration failed");
                 }
                 config.save();
                 p.sendMessage(MessageConfig.getHomeSet());
@@ -268,7 +268,7 @@ public class WorldSettingsCommands {
 
             sw.setCreating(true);
             // For #16
-            WorldSystem.getInstance().getAdapter().create(creator, sw, () -> {
+            WorldSystemPlugin.getInstance().getAdapter().create(creator, sw, () -> {
                 if (p != null && p.isOnline())
                     p.sendMessage(MessageConfig.getWorldCreated());
             });
@@ -276,7 +276,7 @@ public class WorldSettingsCommands {
         } catch (IOException e) {
             e.printStackTrace();
             p.sendMessage(MessageConfig.getUnknownError());
-            WorldSystem.logger().log(Level.SEVERE, "Couldn't reset world of " + p.getName());
+            WorldSystemPlugin.logger().log(Level.SEVERE, "Couldn't reset world of " + p.getName());
         }
     }
 }

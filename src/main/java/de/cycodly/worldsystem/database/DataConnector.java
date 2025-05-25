@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import lombok.Getter;
 
 public abstract class DataConnector implements IDataUtil {
@@ -20,12 +20,12 @@ public abstract class DataConnector implements IDataUtil {
         synchronized (lock) {
             try {
                 if (connection == null || connection.isClosed()) {
-                    WorldSystem.logger().log(Level.SEVERE, "[WorldSystem | DB] Connection does not exist or was already closed");
+                    WorldSystemPlugin.logger().log(Level.SEVERE, "[WorldSystem | DB] Connection does not exist or was already closed");
                     return;
                 }
                 connection.close();
             } catch (SQLException e) {
-                WorldSystem.logger().log(Level.WARNING, "[WorldSystem | DB] Connection could not be closed");
+                WorldSystemPlugin.logger().log(Level.WARNING, "[WorldSystem | DB] Connection could not be closed");
                 e.printStackTrace();
             }
         }

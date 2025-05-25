@@ -10,7 +10,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import de.cycodly.worldsystem.WorldSystem;
+import de.cycodly.worldsystem.WorldSystemPlugin;
 import de.cycodly.worldsystem.config.DependenceConfig;
 import de.cycodly.worldsystem.config.WorldConfig;
 import de.cycodly.worldsystem.wrapper.SystemWorld;
@@ -19,7 +19,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 public class PapiExtension extends PlaceholderExpansion {
 
-    private final WorldSystem worldSystem = WorldSystem.getInstance();
+    private final WorldSystemPlugin worldSystem = WorldSystemPlugin.getInstance();
 
     @Override
     @NotNull

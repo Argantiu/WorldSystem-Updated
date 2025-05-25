@@ -40,7 +40,7 @@ import de.cycodly.worldsystem.wrapper.AsyncCreatorAdapter;
  * @version 2.2.0.1
  * @since 10.07.2017
  */
-public class WorldSystem extends JavaPlugin {
+public class WorldSystemPlugin extends JavaPlugin {
     private static final int BSTATS_ID = 25205;
     private static boolean ABOVE_V13 = false;
     private final String PLUGINVERSION = this.getDescription().getVersion();
@@ -84,7 +84,7 @@ public class WorldSystem extends JavaPlugin {
                 confg.set("HighestID", 0);
                 confg.save(dependenceYML);
             } catch (IOException e) {
-                WorldSystem.logger().log(Level.SEVERE, "Wasn't able to create DependenceConfig");
+                WorldSystemPlugin.logger().log(Level.SEVERE, "Wasn't able to create DependenceConfig");
                 e.printStackTrace();
             }
             new DependenceConfig();
@@ -100,12 +100,12 @@ public class WorldSystem extends JavaPlugin {
         }
     }
 
-    public static WorldSystem getInstance() {
-        return JavaPlugin.getPlugin(WorldSystem.class);
+    public static WorldSystemPlugin getInstance() {
+        return JavaPlugin.getPlugin(WorldSystemPlugin.class);
     }
 
     public static Logger logger() {
-        return WorldSystem.getPlugin(WorldSystem.class).getLogger();
+        return WorldSystemPlugin.getPlugin(WorldSystemPlugin.class).getLogger();
     }
 
     @Override
