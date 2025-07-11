@@ -48,6 +48,7 @@ public class WorldSystem extends JavaPlugin {
 
     public static void createConfigs() {
         File folder = getInstance().getDataFolder();
+        
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -108,6 +109,10 @@ public class WorldSystem extends JavaPlugin {
         return WorldSystem.getPlugin(WorldSystem.class).getLogger();
     }
 
+    public void sendConsoleMessage(String text) {
+        Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + text);
+    }
+
     @Override
     public void onEnable() {
 
@@ -131,15 +136,14 @@ public class WorldSystem extends JavaPlugin {
         pm.registerEvents(new BlockListener(), this);
         pm.registerEvents(new CommandListener(), this);
         pm.registerEvents(new WorldInitSkipSpawn(), this);
-        if (pm.getPlugin("WorldEdit") != null)
+        if (pm.getPlugin("WorldEdit") != null) {
             pm.registerEvents(new WorldEditListener(), this);
+        }
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new WorldCheckerRunnable(), 20 * 5,
-                20 * PluginConfig.getLagCheckPeriod());
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new WorldCheckerRunnable(), 20 * 5, 20 * PluginConfig.getLagCheckPeriod());
 
         if (PluginConfig.useGC()) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new GCRunnable(), 20 * 5,
-                    20 * PluginConfig.getGCPeriod());
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new GCRunnable(), 20 * 5, 20 * PluginConfig.getGCPeriod());
         }
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -148,45 +152,45 @@ public class WorldSystem extends JavaPlugin {
             }
         }, 20 * 60 * 2, 20 * 60 * 2);
 
-        // System.setProperty("bstats.relocatecheck", "false");
+        // Add BStats metrics
+
         Metrics metrics = new Metrics(this, BSTATS_ID);
         metrics.addCustomChart(new SingleLineChart("worlds", DependenceConfig::getHighestID));
 
+        // Add world async loader
+
         if (Bukkit.getPluginManager().getPlugin("Chunky") != null && PluginConfig.loadWorldsASync()) {
 
-            Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix() + "Found Chunky! Worlds now will be created asynchronously");
+            this.sendConsoleMessage("Found Chunky! Worlds now will be created asynchronously");
             CREATOR_INSTANCE = new AsyncCreatorAdapter();
 
         } else {
             
             CREATOR_INSTANCE = (c, sw, r) -> {
                 Bukkit.getWorlds().add(c.createWorld());
-                if (sw != null)
+                if (sw != null) {
                     sw.setCreating(false);
+                }
                 r.run();
             };
         }
 
-        // Remove old worlds option #28
+        // Remove old worlds option
         if (PluginConfig.shouldDelete()) {
-            Bukkit.getConsoleSender().sendMessage(PluginConfig.getPrefix()
-                    + "Searching for old worlds to delete if not loaded for " + PluginConfig.deleteAfter() + " days");
+            this.sendConsoleMessage("Searching for old worlds to delete if not loaded for " + PluginConfig.deleteAfter() + " days");
             DependenceConfig.checkWorlds();
         }
 
-        Bukkit.getConsoleSender()
-                .sendMessage(PluginConfig.getPrefix() + "Successfully enabled WorldSystem v" + PLUGINVERSION);
+        this.sendConsoleMessage("Successfully enabled WorldSystem v" + PLUGINVERSION);
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
                     new PapiExtension().register();
-                    Bukkit.getConsoleSender()
-                            .sendMessage(PluginConfig.getPrefix() + "Successfully enabled placeholders");
+                    this.sendConsoleMessage("Successfully enabled placeholders");
                 } else {
-                    Bukkit.getConsoleSender().sendMessage(
-                            PluginConfig.getPrefix() + "PlaceholderAPI not found. No placeholders registered");
+                    this.sendConsoleMessage("PlaceholderAPI not found. No placeholders registered");
                 }
             }
         }.runTaskLater(this, 20L); // Delay of 20 ticks (1 second)
@@ -204,8 +208,7 @@ public class WorldSystem extends JavaPlugin {
         // Close database connection
         DataProvider.instance.util.close();
 
-        Bukkit.getConsoleSender()
-                .sendMessage(PluginConfig.getPrefix() + "Successfully disabled WorldSystem v" + PLUGINVERSION);
+        this.sendConsoleMessage("Successfully disabled WorldSystem v" + PLUGINVERSION);
     }
 
     public ICreatorAdapter getAdapter() {

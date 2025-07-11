@@ -49,8 +49,9 @@ public class WorldConfig {
     public Location home = null;
 
     private WorldConfig(String worldname) {
-        if (!exists(worldname))
+        if (!exists(worldname)) {
             throw new IllegalArgumentException("WorldConfig doesn't exist");
+        }
         owner = UUID.fromString(worldname.substring(worldname.length() - 36));
         id = Integer.parseInt(worldname.split("-")[0].substring(2));
     }
@@ -59,8 +60,6 @@ public class WorldConfig {
         File worldconfig = new File(Bukkit.getWorldContainer(), worldname + "/worldconfig.yml");
         if (!worldconfig.exists()) {
             worldconfig = new File(PluginConfig.getWorlddir() + "/" + worldname + "/worldconfig.yml");
-        }
-        if (!worldconfig.exists()) {
             worldconfig = new File(worldname + "/worldconfig.yml");
         }
         return worldconfig;
@@ -84,22 +83,26 @@ public class WorldConfig {
      * @return WorldConfig of the world
      */
     public static WorldConfig getWorldConfig(String worldname) {
-        if (!instances.containsKey(worldname))
+        if (!instances.containsKey(worldname)) {
             instances.put(worldname, new WorldConfig(worldname));
+        }
         return instances.get(worldname).load();
     }
 
     public static void create(UUID uuid, WorldTemplate template) {
         DependenceConfig dc = new DependenceConfig(uuid);
+        
         String worldname = dc.getWorldname();
         WorldSystem.logger().log(Level.INFO, PluginConfig.getWorlddir() + worldname);
         File file = new File(PluginConfig.getWorlddir() + worldname + "/worldconfig.yml");
+        
         try {
             file.createNewFile();
         } catch (IOException e1) {
             e1.printStackTrace();
             WorldSystem.logger().log(Level.SEVERE, "Error while creating worldconfig for " + uuid.toString());
         }
+
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set("Informations.ID", dc.getID());
         cfg.set("Informations.Owner.PlayerUUID", uuid.toString());
@@ -127,8 +130,9 @@ public class WorldConfig {
      *         permission
      */
     public boolean addPermission(UUID player, WorldPerm perm) {
-        if (owner.equals(player))
+        if (owner.equals(player)) {
             throw new IllegalArgumentException("Permissions of the owner cannot change");
+        }
         HashSet<WorldPerm> perms = permissions.computeIfAbsent(player, k -> new HashSet<>());
         boolean added = perms.add(perm);
         if (added) {
@@ -146,8 +150,9 @@ public class WorldConfig {
      *         permission
      */
     public boolean removePermission(UUID player, WorldPerm perm) {
-        if (owner.equals(player))
+        if (owner.equals(player)) {
             throw new IllegalArgumentException("Permissions of the owner cannot change");
+        }
         HashSet<WorldPerm> perms = permissions.get(player);
         if (perms == null) {
             return false;
@@ -166,8 +171,9 @@ public class WorldConfig {
      * @return true if a permission was removed false otherwise
      */
     public boolean removeAllPermissions(UUID player) {
-        if (owner.equals(player))
+        if (owner.equals(player)) {
             throw new IllegalArgumentException("Permissions of the owner cannot change");
+        }
         HashSet<WorldPerm> perms = permissions.remove(player);
         return perms != null && perms.size() != 0;
     }
@@ -179,8 +185,9 @@ public class WorldConfig {
      * @return true if the permissions of the player changed, false otherwiste
      */
     public boolean addAllPermissions(UUID player) {
-        if (owner.equals(player))
+        if (owner.equals(player)) {
             throw new IllegalArgumentException("Permissions of the owner cannot change");
+        }
         HashSet<WorldPerm> perms = permissions.computeIfAbsent(player, k -> new HashSet<>());
         return perms.addAll(Sets.newHashSet(WorldPerm.values()));
     }
@@ -193,8 +200,9 @@ public class WorldConfig {
      * @return true if the player has the permission, false otherwise
      */
     public boolean hasPermission(UUID player, WorldPerm perm) {
-        if (owner.equals(player))
+        if (owner.equals(player)) {
             return true;
+        }
         HashSet<WorldPerm> perms = permissions.get(player);
         return perms != null && perms.contains(perm);
     }
@@ -334,15 +342,19 @@ public class WorldConfig {
      * @return if the player has the permissions
      */
     public boolean setBuild(UUID player, UUID target, boolean allowed) {
-        if (!isAllowedToAdministrateMember(player, target))
+        if (!isAllowedToAdministrateMember(player, target)) {
             return false;
+        }
         setBuild(target, allowed);
         return true;
     }
 
     private boolean isAllowedToAdministrateMember(UUID player, UUID target) {
-        return target != owner && player != target && hasPermission(player, WorldPerm.ADMINISTRATEMEMBERS)
-                && hasPermission(player, WorldPerm.ADMINISTRATEMEMBERS);
+        return 
+            target != owner && 
+            player != target && 
+            hasPermission(player, WorldPerm.ADMINISTRATEMEMBERS) && 
+            hasPermission(player, WorldPerm.ADMINISTRATEMEMBERS);
     }
 
     /**
@@ -370,8 +382,9 @@ public class WorldConfig {
     }
 
     public boolean setGamemode(UUID player, UUID target, boolean allowed) {
-        if (!isAllowedToAdministrateMember(player, target))
+        if (!isAllowedToAdministrateMember(player, target)) {
             return false;
+        }
         setGamemode(target, allowed);
         return true;
     }
@@ -395,8 +408,10 @@ public class WorldConfig {
     }
 
     public boolean setTeleport(UUID player, UUID target, boolean allowed) {
-        if (!isAllowedToAdministrateMember(player, target))
+        if (!isAllowedToAdministrateMember(player, target)) {
             return false;
+        }
+
         setTeleport(target, allowed);
         return true;
     }
@@ -407,8 +422,10 @@ public class WorldConfig {
 
     public HashMap<UUID, String> getMembersWithNames() {
         HashMap<UUID, String> map = new HashMap<>();
+        
         for (UUID uuid : permissions.keySet()) {
             OfflinePlayer op = PlayerWrapper.getOfflinePlayer(uuid);
+            
             if (op == null || op.getName() == null) {
                 if (PluginConfig.contactAuth()) {
                     try {
@@ -474,9 +491,14 @@ public class WorldConfig {
         fire = cfg.getBoolean("Settings.Fire", true);
 
         if (cfg.isSet("Settings.home")) {
-            home = new Location(null, cfg.getDouble("Settings.home.x"), cfg.getDouble("Settings.home.y"),
-                    cfg.getDouble("Settings.home.z"), (float) cfg.getDouble("Settings.home.yaw"),
-                    (float) cfg.getDouble("Settings.home.pitch"));
+            home = new Location(
+                    null, 
+                    cfg.getDouble("Settings.home.x"), 
+                    cfg.getDouble("Settings.home.y"),
+                    cfg.getDouble("Settings.home.z"), 
+            (float) cfg.getDouble("Settings.home.yaw"),
+            (float) cfg.getDouble("Settings.home.pitch")
+            );
         }
 
         if (membersOldFormatted(cfg)) {
@@ -503,6 +525,7 @@ public class WorldConfig {
                     UUID uuid = UUID.fromString(suuid);
                     List<String> list = section.getStringList(suuid);
                     HashSet<WorldPerm> perms = new HashSet<>(list.size());
+                    
                     for (String perm : list) {
                         perms.add(WorldPerm.valueOf(perm));
                     }
@@ -514,10 +537,11 @@ public class WorldConfig {
     }
 
     private boolean membersOldFormatted(YamlConfiguration cfg) {
-        if (cfg.getConfigurationSection("Members") == null)
+        if (cfg.getConfigurationSection("Members") == null) {
             return false;
-        String name = cfg.getString(
-                "Members." + cfg.getConfigurationSection("Members").getKeys(false).iterator().next() + ".Actualname");
+        }
+        String key = cfg.getConfigurationSection("Members").getKeys(false).iterator().next();
+        String name = cfg.getString("Members." + key +".Actualname");
         return name != null;
     }
 
@@ -527,8 +551,14 @@ public class WorldConfig {
     public Location getHome() {
         if (home == null)
             return null;
-        return new Location(Bukkit.getWorld(getWorldName()), home.getX(), home.getY(), home.getZ(), home.getYaw(),
-                home.getPitch());
+        return new Location(Bukkit.getWorld(
+            getWorldName()), 
+            home.getX(), 
+            home.getY(), 
+            home.getZ(), 
+            home.getYaw(),
+            home.getPitch()
+            );
     }
 
     /**
@@ -564,8 +594,9 @@ public class WorldConfig {
      * @return if the player has the permissions to change the value
      */
     public boolean setFire(UUID player, boolean fire) {
-        if (!hasPermission(player, WorldPerm.ADMINISTRATEWORLD))
+        if (!hasPermission(player, WorldPerm.ADMINISTRATEWORLD)) {
             return false;
+        }
         setFire(fire);
         return true;
     }
