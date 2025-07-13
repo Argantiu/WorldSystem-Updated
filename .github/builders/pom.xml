@@ -12,16 +12,16 @@
             <!-- Dependencies -->
             <SpigotAPI>1.21.4-R0.1-SNAPSHOT</SpigotAPI>
             <AuthLib>1.5.26</AuthLib>
-            <WorldEdit>7.3.12</WorldEdit>
+            <WorldEdit>7.3.15</WorldEdit>
             <FAWE>2.13.0</FAWE>
             <VaultAPI>1.7.1</VaultAPI>
             <PlaceholderAPI>2.11.6</PlaceholderAPI>
             <Lombok>1.18.38</Lombok>
             <CommonsIO>2.19.0</CommonsIO>
-            <Minimessage>4.21.0</Minimessage>
+            <Minimessage>4.23.0</Minimessage>
 
             <!-- Test dependencies -->
-            <junitjupiter>5.12.2</junitjupiter>
+            <junitjupiter>5.13.3</junitjupiter>
             <mockitocore>5.18.0</mockitocore>
             <assertjcore>3.27.3</assertjcore>
 
