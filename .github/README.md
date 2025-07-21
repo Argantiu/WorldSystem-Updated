@@ -4,7 +4,6 @@
 <img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-Updated/v2.4.40/total?label=v2.4.40" />
 <a href="https://modrinth.com/plugin/worldsystem/versions"> <img src="https://img.shields.io/modrinth/dt/worldsystem?logo=modrinth&logoColor=green" /> </a></br>
   <strong>A minecraft plugin to give every user his own world</strong></br>
-  1.7 - 1.21.5 Support
 
   ***
 </div>
