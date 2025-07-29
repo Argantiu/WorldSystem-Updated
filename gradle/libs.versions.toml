@@ -2,7 +2,7 @@
 spigotapi = "1.21.4-R0.1-SNAPSHOT"
 authlib = "1.5.26"
 worldedit = "7.3.15"
-fawe = "2.13.0"
+fawe = "2.13.1"
 chunky = "1.4.43"
 vaultapi = "1.7.1"
 placeholderapi = "2.11.6"
