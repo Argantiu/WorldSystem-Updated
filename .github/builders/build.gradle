@@ -16,7 +16,7 @@ VaultAPI = "1.7.1"
 PlaceholderAPI = "2.11.6"
 Lombok = "1.18.38"
 CommonsIO = "2.20.0"
-Minimessage = "4.23.0"
+Minimessage = "4.24.0"
 gson = "2.11.0"
 guava = "31.1-jre"
 
