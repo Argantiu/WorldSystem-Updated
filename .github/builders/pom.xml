@@ -23,7 +23,7 @@
             <!-- Test dependencies -->
             <junitjupiter>5.13.4</junitjupiter>
             <mockitocore>5.18.0</mockitocore>
-            <assertjcore>3.27.3</assertjcore>
+            <assertjcore>3.27.4</assertjcore>
 
             <!-- Compiler information (java version and encoding type) -->
             <maven.compiler.release>21</maven.compiler.release>
