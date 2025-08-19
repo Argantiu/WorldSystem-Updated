@@ -27,4 +27,3 @@
   <li>Helping other users</li>
   <li>Leaving a good review</li>
 </ul>
-<a href="https://crazycloudcraft.de/dc">Discord Support</a>
