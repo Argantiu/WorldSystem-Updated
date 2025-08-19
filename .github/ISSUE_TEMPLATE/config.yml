@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: WorldSystem Support
+    url: https://github.com/Argantiu/WorldSystem-Updated/discussions
+    about: You have something else you want to talk about? Ask us and the community in our discussions!
   - name: WorldSystem Wiki
     url: https://github.com/Argantiu/WorldSystem-Updated/wiki
     about: Take a look at the wiki page for instructions how to setup and use WorldSystem
