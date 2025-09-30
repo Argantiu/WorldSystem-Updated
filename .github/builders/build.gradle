@@ -20,7 +20,7 @@ Minimessage = "4.24.0"
 gson = "2.11.0"
 guava = "31.1-jre"
 
-Jupiter = "5.+"
+Jupiter = "6.+"
 Mockito = "5.+"
 Assertj = "3.+"
 }

@@ -21,7 +21,7 @@
             <Minimessage>4.24.0</Minimessage>
 
             <!-- Test dependencies -->
-            <junitjupiter>5.14.0</junitjupiter>
+            <junitjupiter>6.0.0</junitjupiter>
             <mockitocore>5.20.0</mockitocore>
             <assertjcore>3.27.6</assertjcore>
 
