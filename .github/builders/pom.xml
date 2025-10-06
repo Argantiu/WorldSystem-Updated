@@ -18,7 +18,7 @@
             <PlaceholderAPI>2.11.6</PlaceholderAPI>
             <Lombok>1.18.42</Lombok>
             <CommonsIO>2.20.0</CommonsIO>
-            <Minimessage>4.24.0</Minimessage>
+            <Minimessage>4.25.0</Minimessage>
 
             <!-- Test dependencies -->
             <junitjupiter>6.0.0</junitjupiter>
