@@ -13,7 +13,7 @@
             <SpigotAPI>1.21.4-R0.1-SNAPSHOT</SpigotAPI>
             <AuthLib>1.5.26</AuthLib>
             <WorldEdit>7.3.16</WorldEdit>
-            <FAWE>2.13.2</FAWE>
+            <FAWE>2.14.0</FAWE>
             <VaultAPI>1.7.1</VaultAPI>
             <PlaceholderAPI>2.11.6</PlaceholderAPI>
             <Lombok>1.18.42</Lombok>
