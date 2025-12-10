@@ -22,7 +22,7 @@
 
             <!-- Test dependencies -->
             <junitjupiter>6.0.1</junitjupiter>
-            <mockitocore>5.20.0</mockitocore>
+            <mockitocore>5.21.0</mockitocore>
             <assertjcore>3.27.6</assertjcore>
 
             <!-- Compiler information (java version and encoding type) -->
