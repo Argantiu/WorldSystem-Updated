@@ -9,7 +9,7 @@ plugins {
 ext {
 SpigotAPI = "1.21.4-R0.1-SNAPSHOT"
 AuthLib = "1.5.26"
-WorldEdit = "7.3.17"
+WorldEdit = "7.3.18"
 FAWE = "2.14.3"
 Chunky = "1.4.55"
 VaultAPI = "1.7.1"
