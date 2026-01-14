@@ -10,7 +10,7 @@ val pluginsoftdepend = "[PlaceholderAPI, Vault, Chunky]"
 
 plugins {
     id("com.gradleup.shadow") version "9.3.1"
-    id("io.freefair.lombok") version "9.1.0"
+    id("io.freefair.lombok") version "9.2.0"
     id("java")
     id("jacoco")
     id("base")
