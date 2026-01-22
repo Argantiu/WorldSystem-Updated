@@ -1,3 +1,9 @@
+### +++ DISCONTINUED +++
+This plugin is discontinued. Please change to  
+https://www.spigotmc.org/resources/gprivateworlds-private-worlds.124714/  
+https://github.com/Giancpz/GPrivateWorlds  
+Thank you very much.
+
 <div align="center">
 <img src="https://raw.githubusercontent.com/Argantiu/WorldSystem-Updated/master/.github/Worldsystemlogo_renewed.png" width="500"></br>
 <img src="https://img.shields.io/github/downloads/Argantiu/WorldSystem-Updated/total?logo=github&logoColor=green&color=green&label=downloads" />
@@ -27,3 +33,4 @@
   <li>Helping other users</li>
   <li>Leaving a good review</li>
 </ul>
+
