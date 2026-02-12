@@ -1,7 +1,7 @@
 ### +++ DISCONTINUED +++
-This plugin is discontinued. Please change to  
-https://www.spigotmc.org/resources/gprivateworlds-private-worlds.124714/  
-https://github.com/Giancpz/GPrivateWorlds  
+This plugin is discontinued. Please change to another alternative  
+<!--- https://www.spigotmc.org/resources/gprivateworlds-private-worlds.124714/  
+https://github.com/Giancpz/GPrivateWorlds-->
 Thank you very much.
 
 <div align="center">
@@ -33,4 +33,5 @@ Thank you very much.
   <li>Helping other users</li>
   <li>Leaving a good review</li>
 </ul>
+
 
