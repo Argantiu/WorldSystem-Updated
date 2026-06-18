@@ -24,7 +24,7 @@ jobs:
           path: ~/.gradle
           key: ${{ runner.os }}-gradle
 
-      - uses: actions/checkout@v6.0.3
+      - uses: actions/checkout@v7.0.0
 
       - name: Grant execute permission to gradlew
         run: chmod +x gradlew
