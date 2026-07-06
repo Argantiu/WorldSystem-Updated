@@ -9,7 +9,7 @@ val plugindepend = "[WorldEdit]"
 val pluginsoftdepend = "[PlaceholderAPI, Vault, Chunky]"
 
 plugins {
-    id("com.gradleup.shadow") version "9.4.3"
+    id("com.gradleup.shadow") version "9.5.1"
     id("io.freefair.lombok") version "9.5.0"
     id("java")
     id("jacoco")
